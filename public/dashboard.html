@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SG.IO | Executive Workspace</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --sidebar-bg: #1A1F24;
+            --main-bg: #F9F8F4;
+            /* Ivory Cream */
+            --text-main: #2C2C2C;
+            --accent-gold: #C5A880;
+            --border: #E2DFD8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: var(--main-bg);
+            color: var(--text-main);
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            color: #E8E5DF;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 0;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+
+        .logo-area h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .logo-area p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .nav-links a {
+            color: #A0A0A0;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(197, 168, 128, 0.1);
+            color: var(--accent-gold);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            overflow-y: auto;
+        }
+
+        .top-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+        }
+
+        .top-header h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .top-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-main);
+        }
+
+        /* Tab Sections */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* OVERVIEW WIDGETS */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .widget-card {
+            background: #FFF;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .widget-card h5 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .widget-card .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--sidebar-bg);
+        }
+
+        /* MANAGEMENT TOOLS / LOCKED STATE */
+        .locked-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #FFF;
+            border: 1px dashed var(--border);
+            border-radius: 4px;
+        }
+
+        .locked-state i {
+            font-size: 3rem;
+            color: #999;
+            margin-bottom: 1.5rem;
+        }
+
+        .locked-state h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .locked-state p {
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-upgrade {
+            background: var(--sidebar-bg);
+            color: #FFF;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            border-radius: 2px;
+        }
+
+        .automation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .auto-card {
+            background: #FFF;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .auto-card h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .auto-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-action {
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-action:hover {
+            background: var(--accent-gold);
+            color: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <h1>SG.IO</h1>
+            <p>Executive Suite</p>
+        </div>
+        <div class="nav-links">
+            <a onclick="switchTab('overview')" id="nav-overview" class="active"><i class="fa-solid fa-chart-pie"></i>
+                Overview</a>
+            <a onclick="switchTab('management')" id="nav-management"><i class="fa-solid fa-sliders"></i> Management
+                Tools</a>
+            <a onclick="switchTab('financials')" id="nav-financials"><i class="fa-solid fa-wallet"></i> Financials</a>
+            <a onclick="switchTab('clients')" id="nav-clients"><i class="fa-solid fa-users"></i> Client Relations</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="top-header">
+            <h4 id="workspace-sub">Workspace</h4>
+            <h2 id="workspace-title">Loading Dashboard...</h2>
+            <p style="margin-top: 0.5rem; color: #666;" id="brand-welcome">Welcome to your management portal.</p>
+        </div>
+
+        <!-- 1. OVERVIEW TAB -->
+        <div id="tab-overview" class="tab-content active">
+            <p>Here is the current status of your operations.</p>
+            <div class="widgets-grid">
+                <div class="widget-card">
+                    <h5>Action Items</h5>
+                    <div class="value">3</div>
+                </div>
+                <div class="widget-card">
+                    <h5>Current Revenue</h5>
+                    <div class="value" id="revenue-display">$0.00</div>
+                </div>
+                <div class="widget-card">
+                    <h5>Active Clients</h5>
+                    <div class="value">12</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. MANAGEMENT TOOLS TAB -->
+        <div id="tab-management" class="tab-content">
+
+            <!-- Hii itaonekana kwa mteja wa FREE -->
+            <div id="locked-tools" class="locked-state" style="display: none;">
+                <i class="fa-solid fa-lock"></i>
+                <h3>Premium Feature</h3>
+                <p>Advanced management tools, automations, and AI integrations are restricted to Premium Plans.</p>
+                <a href="checkout.html" class="btn-upgrade">Upgrade Workspace</a>
+            </div>
+
+            <!-- Hii itaonekana kwa mteja wa KULIPIA -->
+            <div id="unlocked-tools" style="display: none;">
+                <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">Automation Hub</h3>
+                <div class="automation-grid">
+                    <div class="auto-card">
+                        <h4>Auto-Sync Inventory</h4>
+                        <p>Automatically update your stock levels across all channels.</p>
+                        <button class="btn-action">Run Sync</button>
+                    </div>
+                    <div class="auto-card">
+                        <h4>Client Onboarding AI</h4>
+                        <p>Trigger automated welcome sequences for new clients.</p>
+                        <button class="btn-action">Configure</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 3. FINANCIALS TAB -->
+        <div id="tab-financials" class="tab-content">
+            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Financial Reports</h3>
+            <div class="widget-card">
+                <p>No transactions recorded for this period yet.</p>
+            </div>
+        </div>
+
+        <!-- 4. CLIENTS TAB -->
+        <div id="tab-clients" class="tab-content">
+            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Client Database</h3>
+            <div class="widget-card">
+                <p>Your CRM system is currently standing by.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        // Function to apply custom branding dynamically
+        function applyBranding() {
+            // Retrieve the stored color, default to gold if none is found
+            const primaryColor = localStorage.getItem('userPrimaryColor') || '#C5A880';
+
+            // Apply the color to the CSS root variable
+            document.documentElement.style.setProperty('--accent-gold', primaryColor);
+        }
+
+        // Run the function as soon as the dashboard loads
+        applyBranding();
+        // 1. CHUKUA TAARIFA KUTOKA KWENYE LINK (URL)
+        const params = new URLSearchParams(window.location.search);
+        const niche = params.get('niche') || 'Business';
+        const plan = params.get('plan') || 'free';
+        const brand = params.get('brand') || 'Your Workspace';
+
+        // 2. WEKA JINA LA DASHBOARD KULINGANA NA NICHE
+        const formattedNiche = niche.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        document.getElementById('workspace-title').innerText = `${formattedNiche} Dashboard`;
+        document.getElementById('workspace-sub').innerText = `${plan.toUpperCase()} PLAN WORKSPACE`;
+
+        if (brand !== 'Your Workspace') {
+            document.getElementById('brand-welcome').innerText = `Welcome back, ${decodeURIComponent(brand)}.`;
+        }
+
+        // Weka revenue ya kuongopea kulingana na niche ionekane nzuri
+        const demoRevenue = { 'real-estate': '$45,200', 'boutique': '$2,140', 'b2b': '$12,500' };
+        document.getElementById('revenue-display').innerText = demoRevenue[niche.toLowerCase()] || '$0.00';
+
+        // 3. LOGIC YA TAB NAVIGATION
+        function switchTab(tabName) {
+            // Ficha tabs zote na ondoa 'active' class kwenye links
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+
+            // Onyesha tab iliyochaguliwa
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            document.getElementById(`nav-${tabName}`).classList.add('active');
+
+            // 4. LOGIC YA KUFICHA/KUONYESHA MANAGEMENT TOOLS KULINGANA NA PLAN
+            if (tabName === 'management') {
+                if (plan === 'free') {
+                    document.getElementById('locked-tools').style.display = 'block';
+                    document.getElementById('unlocked-tools').style.display = 'none';
+                } else {
+                    document.getElementById('locked-tools').style.display = 'none';
+                    document.getElementById('unlocked-tools').style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

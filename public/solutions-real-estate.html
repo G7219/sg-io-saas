@@ -1,0 +1,515 @@
+<!-- REAL ESTATE SOLUTION PAGE
+Location: public/solutions/real-estate.html
+-->
+
+<!DOCTYPE html>
+<html lang="en" data-niche="REAL_ESTATE">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-07ZTY6SJKD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-07ZTY6SJKD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tenant-id" content="">
+    <title>Real Estate Solutions | SG.IO Global</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/sg-io-enterprise-design-system.css">
+    <link rel="stylesheet" href="/assets/css/feature-gating.css">
+
+    <style>
+        .solution-hero {
+            background: linear-gradient(135deg, #1A2F3F 0%, #2D3E3F 100%);
+            color: #F5F1E8;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .solution-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .solution-hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .niche-color-accent {
+            color: #B8860B;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: #FAFAF8;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #B8860B;
+        }
+
+        .feature-card h3 {
+            color: #2D3E3F;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tier-comparison {
+            margin: 60px 0;
+        }
+
+        .tier-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tier-card {
+            background: white;
+            border: 2px solid #E5DDD0;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tier-card:hover {
+            border-color: #B8860B;
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.1);
+        }
+
+        .tier-card.popular {
+            border-color: #B8860B;
+            background: linear-gradient(135deg, #FFFEF8 0%, #FAF7F0 100%);
+            transform: scale(1.05);
+        }
+
+        .tier-card h3 {
+            color: #2D3E3F;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tier-price {
+            font-size: 32px;
+            color: #B8860B;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .tier-price small {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .tier-features {
+            text-align: left;
+            margin: 25px 0;
+        }
+
+        .tier-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #E5DDD0;
+            list-style: none;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .tier-features li:before {
+            content: "✓ ";
+            color: #6B8E23;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .btn-tier {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-tier.primary {
+            background: #B8860B;
+            color: white;
+        }
+
+        .btn-tier.primary:hover {
+            background: #9A7309;
+        }
+
+        .btn-tier.secondary {
+            background: #F5F1E8;
+            color: #2D3E3F;
+            border: 2px solid #B8860B;
+        }
+
+        .btn-tier.secondary:hover {
+            background: #E5DDD0;
+        }
+
+        .niche-showcase {
+            background: #FAFAF8;
+            padding: 60px 20px;
+            border-radius: 8px;
+            margin: 60px 0;
+        }
+
+        .showcase-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .showcase-item:nth-child(even) {
+            direction: rtl;
+        }
+
+        .showcase-item:nth-child(even)>* {
+            direction: ltr;
+        }
+
+        .showcase-content h3 {
+            font-size: 28px;
+            color: #2D3E3F;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .showcase-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .solution-hero h1 {
+                font-size: 32px;
+            }
+
+            .showcase-item,
+            .showcase-item:nth-child(even) {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .tier-card.popular {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar" style="background: white; border-bottom: 1px solid #E5DDD0;">
+        <div class="container"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <h2 style="margin: 0; color: #2D3E3F;">SG.IO Global</h2>
+            <div style="display: flex; gap: 30px;">
+                <a href="/" style="text-decoration: none; color: #2D3E3F; font-weight: 500;">HOME</a>
+                <a href="/#solutions" style="text-decoration: none; color: #2D3E3F; font-weight: 500;">SOLUTIONS</a>
+                <a href="/pricing" style="text-decoration: none; color: #2D3E3F; font-weight: 500;">PRICING</a>
+                <a href="/signup" class="btn btn--gold" style="padding: 10px 20px;">GET STARTED</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="solution-hero">
+        <div class="container">
+            <h1>Real Estate Management Platform</h1>
+            <p>Manage properties, clients, and communications seamlessly with AI-powered tools designed specifically for
+                real estate professionals.</p>
+            <button class="btn btn--gold" style="padding: 15px 40px; font-size: 16px;">Start Free Trial</button>
+        </div>
+    </section>
+
+    <!-- KEY FEATURES FOR REAL ESTATE -->
+    <section class="container" style="padding: 60px 20px;">
+        <h2 style="text-align: center; color: #2D3E3F; margin-bottom: 40px; font-family: 'Playfair Display', serif;">Why
+            Real Estate Professionals Choose SG.IO</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>📍 Property Management</h3>
+                <p>Organize listings, track viewings, and manage property details all in one place. Keep your portfolio
+                    organized and accessible.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>👥 Client Relations</h3>
+                <p>Track client interactions, preferences, and communication history. Build stronger relationships with
+                    personalized follow-ups.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📊 Market Analytics</h3>
+                <p>Access market trends, pricing insights, and competitive analysis to make data-driven decisions.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📧 Automated Communications</h3>
+                <p>Send property updates, showing confirmations, and follow-ups automatically using AI.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🗺️ Location Intelligence</h3>
+                <p>Display properties on interactive maps with neighborhood info, schools, amenities, and
+                    transportation.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📱 Mobile App</h3>
+                <p>Manage properties on the go. Access client info, showing schedules, and contracts from your phone.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NICHE SHOWCASE -->
+    <section class="niche-showcase">
+        <div class="container">
+            <h2
+                style="color: #2D3E3F; text-align: center; margin-bottom: 50px; font-family: 'Playfair Display', serif;">
+                How Real Estate Teams Benefit</h2>
+
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <h3>Agents</h3>
+                    <p>Close more deals faster with organized client management, automated follow-ups, and instant
+                        property insights at your fingertips.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;">✓ Track lead sources and conversion rates</li>
+                        <li style="padding: 8px 0;">✓ Automate showing confirmations</li>
+                        <li style="padding: 8px 0;">✓ Real-time property alerts</li>
+                    </ul>
+                </div>
+                <div style="background: #2D3E3F; height: 300px; border-radius: 8px;"></div>
+            </div>
+
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <h3>Brokers</h3>
+                    <p>Manage your entire team from a centralized dashboard. Monitor productivity, track commissions,
+                        and ensure compliance effortlessly.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;">✓ Team performance analytics</li>
+                        <li style="padding: 8px 0;">✓ Commission tracking</li>
+                        <li style="padding: 8px 0;">✓ Compliance monitoring</li>
+                    </ul>
+                </div>
+                <div style="background: #2D3E3F; height: 300px; border-radius: 8px;"></div>
+            </div>
+
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <h3>Property Managers</h3>
+                    <p>Simplify tenant management, maintenance requests, and rent collection. Keep properties occupied
+                        and profitable.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;">✓ Tenant communication portal</li>
+                        <li style="padding: 8px 0;">✓ Maintenance request tracking</li>
+                        <li style="padding: 8px 0;">✓ Rent collection automation</li>
+                    </ul>
+                </div>
+                <div style="background: #2D3E3F; height: 300px; border-radius: 8px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING FOR REAL ESTATE -->
+    <section class="container" style="padding: 60px 20px;">
+        <h2 style="text-align: center; color: #2D3E3F; margin-bottom: 40px; font-family: 'Playfair Display', serif;">
+            Pricing Plans for Real Estate</h2>
+
+        <div class="tier-cards">
+            <!-- FREE TIER -->
+            <div class="tier-card">
+                <h3>Free</h3>
+                <div class="tier-price">$0<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">Perfect for getting started</p>
+
+                <ul class="tier-features">
+                    <li>Up to 5 property listings</li>
+                    <li>Basic client tracking</li>
+                    <li>Email support</li>
+                    <li>Single user account</li>
+                    <li>10K AI messages/month</li>
+                    <li>Basic website</li>
+                </ul>
+
+                <button class="btn-tier secondary" onclick="selectTier('FREE')">Get Started</button>
+            </div>
+
+            <!-- LITE TIER -->
+            <div class="tier-card popular">
+                <span
+                    style="background: #B8860B; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">POPULAR</span>
+                <h3>Lite</h3>
+                <div class="tier-price">$30<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">For individual agents</p>
+
+                <ul class="tier-features">
+                    <li>Unlimited property listings</li>
+                    <li>Advanced client CRM</li>
+                    <li>Interactive property maps</li>
+                    <li>Google Reviews display</li>
+                    <li>Email + Chat support</li>
+                    <li>Up to 2 team members</li>
+                    <li>50K AI messages/month</li>
+                    <li>Custom domain</li>
+                </ul>
+                <div class="pricing-actions" style="margin-top: 20px;">
+                    <a href="/checkout.html?niche=real-estate&plan=lite&trial=true"
+                        style="display: block; width: 100%; padding: 14px 0; background-color: #2c2c2c; color: #ffffff; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase;">
+                        Start 4-Day Free Trial
+                    </a>
+                    <p
+                        style="font-size: 11px; color: #888; text-align: center; margin: 8px 0 15px 0; font-family: 'Inter', sans-serif;">
+                        Requires setup. Billed after 4 days.
+                    </p>
+
+                    <a href="/checkout.html?niche=real-estate&plan=lite"
+                        style="display: block; width: 100%; padding: 12px 0; background-color: transparent; color: #2c2c2c; border: 1px solid #2c2c2c; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase; transition: all 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#f4f4f2'"
+                        onmouseout="this.style.backgroundColor='transparent'">
+                        Pay Now
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- RISE TIER -->
+            <div class="tier-card">
+                <h3>Rise</h3>
+                <div class="tier-price">$75<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">For small brokerages</p>
+
+                <ul class="tier-features">
+                    <li>Everything in Lite, plus:</li>
+                    <li>Google Sheets auto-sync</li>
+                    <li>Full social media integration</li>
+                    <li>Advanced analytics dashboard</li>
+                    <li>Up to 5 team members</li>
+                    <li>Automated showing confirmations</li>
+                    <li>500K AI messages/month</li>
+                    <li>2 AI providers (Groq + Gemini)</li>
+                </ul>
+
+                <div class="pricing-actions" style="margin-top: 20px;">
+                    <a href="/checkout.html?niche=real-estate&plan=rise&trial=true"
+                        style="display: block; width: 100%; padding: 14px 0; background-color: #2c2c2c; color: #ffffff; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase;">
+                        Start 4-Day Free Trial
+                    </a>
+                    <p
+                        style="font-size: 11px; color: #888; text-align: center; margin: 8px 0 15px 0; font-family: 'Inter', sans-serif;">
+                        Requires setup. Billed after 4 days.
+                    </p>
+
+                    <a href="/checkout.html?niche=real-estate&plan=rise"
+                        style="display: block; width: 100%; padding: 12px 0; background-color: transparent; color: #2c2c2c; border: 1px solid #2c2c2c; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase; transition: all 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#f4f4f2'"
+                        onmouseout="this.style.backgroundColor='transparent'">
+                        Pay Now
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- ELITE TIER -->
+            <div class="tier-card">
+                <h3>Elite</h3>
+                <div class="tier-price">$100<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">For large organizations</p>
+
+                <ul class="tier-features">
+                    <li>Everything in Rise, plus:</li>
+                    <li>CRM sync (HubSpot, Salesforce)</li>
+                    <li>Unlimited team members</li>
+                    <li>Advanced security (2FA, SSO)</li>
+                    <li>White-label solution</li>
+                    <li>API access for integrations</li>
+                    <li>24/7 phone support</li>
+                    <li>Unlimited AI messages</li>
+                </ul>
+                <div class="pricing-actions" style="margin-top: 20px;">
+                    <a href="/checkout.html?niche=real-estate&plan=elite&trial=true"
+                        style="display: block; width: 100%; padding: 14px 0; background-color: #2c2c2c; color: #ffffff; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase;">
+                        Start 4-Day Free Trial
+                    </a>
+                    <p
+                        style="font-size: 11px; color: #888; text-align: center; margin: 8px 0 15px 0; font-family: 'Inter', sans-serif;">
+                        Requires setup. Billed after 4 days.
+                    </p>
+
+                    <a href="/checkout.html?niche=real-estate&plan=elite"
+                        style="display: block; width: 100%; padding: 12px 0; background-color: transparent; color: #2c2c2c; border: 1px solid #2c2c2c; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase; transition: all 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#f4f4f2'"
+                        onmouseout="this.style.backgroundColor='transparent'">
+                        Pay Now
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section
+        style="background: linear-gradient(135deg, #1A2F3F 0%, #2D3E3F 100%); color: #F5F1E8; padding: 60px 20px; text-align: center;">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 20px;">Ready to Transform
+                Your Real Estate Business?</h2>
+            <p style="font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Start managing properties smarter, close more deals, and scale your business with SG.IO.</p>
+            <button class="btn btn--gold" style="padding: 15px 40px; font-size: 16px;" onclick="startTrial()">Start Free
+                Trial - No Credit Card Required</button>
+        </div>
+    </section>
+
+    <script src="/assets/js/feature-gating-client.js"></script>
+    <script>
+        function selectTier(tier) {
+            window.location.href = `/signup?plan=${tier}&niche=REAL_ESTATE`;
+        }
+
+        function startTrial() {
+            window.location.href = '/signup?niche=REAL_ESTATE';
+        }
+    </script>
+</body>
+
+</html>

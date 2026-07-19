@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" data-niche="B2B" data-business-id="demo-business">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Premium platform for real estate, churches, pharmacies, and sophisticated businesses">
+
+    <title>SG.IO Global | Enterprise Solutions for Refined Businesses</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/sg-io-enterprise-design-system.css">
+    <link rel="stylesheet" href="/assets/css/sg-io-enterprise-integrations.css">
+
+    <!-- Leaflet for Maps -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+
+<body>
+    <!-- NAVIGATION -->
+    <header class="nav-header">
+        <div class="nav-container container">
+            <div class="nav-brand">SG.IO Global</div>
+            <nav class="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/solutions" class="nav-link">Solutions</a>
+                <a href="/integrations" class="nav-link">Integrations</a>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <a href="/contact" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="section--hero">
+        <div class="container">
+            <div>
+                <h1>Refined Solutions for Sophisticated Businesses</h1>
+                <p
+                    style="font-size: var(--text-lg); line-height: var(--line-loose); margin-bottom: var(--spacing-2xl); max-width: 600px;">
+                    Enterprise platform designed for real estate agencies, churches, pharmacies, boutiques, salons, and
+                    distinguished organizations seeking elegance and reliability.
+                </p>
+                <div class="flex">
+                    <button class="btn btn--gold btn--large">Begin Your Journey</button>
+                    <button class="btn btn--secondary btn--large">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTIONS SHOWCASE -->
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-2xl);">Tailored for Your Industry</h2>
+
+            <div class="grid grid--3">
+                <!-- Real Estate -->
+                <div class="card card--elevated">
+                    <div class="card__header">
+                        <h3 class="card__title">Real Estate</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Showcase properties with refined portfolio management, location mapping, and client
+                            relationship tools designed for professional agents.</p>
+                        <ul style="list-style: none; padding: 0; margin: var(--spacing-lg) 0;">
+                            <li>Property Portfolio</li>
+                            <li>Location Mapping</li>
+                            <li>Lead Management</li>
+                            <li>Client Communications</li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="/solutions-real-estate.html" class="btn btn--secondary btn--small">Explore</a>
+                    </div>
+                </div>
+
+                <!-- Church & Ministry -->
+                <div class="card card--elevated">
+                    <div class="card__header">
+                        <h3 class="card__title">Churches & Ministries</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Community and congregation management with event scheduling, member directory, and
+                            communication tools for faith communities.</p>
+                        <ul style="list-style: none; padding: 0; margin: var(--spacing-lg) 0;">
+                            <li>Congregation Directory</li>
+                            <li>Event Management</li>
+                            <li>Volunteer Coordination</li>
+                            <li>Giving & Tithes</li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="/solutions-church.html" class="btn btn--secondary btn--small">Explore</a>
+                    </div>
+                </div>
+
+                <!-- Healthcare & Pharmacy -->
+                <div class="card card--elevated">
+                    <div class="card__header">
+                        <h3 class="card__title">Pharmacies & Healthcare</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Patient management, prescription tracking, and inventory solutions for healthcare providers
+                            and pharmacies.</p>
+                        <ul style="list-style: none; padding: 0; margin: var(--spacing-lg) 0;">
+                            <li>Patient Profiles</li>
+                            <li>Prescription Management</li>
+                            <li>Inventory Tracking</li>
+                            <li>Compliance Tools</li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="/solutions-pharmacy.html" class="btn btn--secondary btn--small">Explore</a>
+                    </div>
+                </div>
+
+                <!-- B2B Services -->
+                <div class="card card--elevated">
+                    <div class="card__header">
+                        <h3 class="card__title">B2B Services</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Enterprise solutions for service providers with client management, project tracking, and
+                            invoice generation.</p>
+                        <ul style="list-style: none; padding: 0; margin: var(--spacing-lg) 0;">
+                            <li>Client Management</li>
+                            <li>Project Tracking</li>
+                            <li>Invoicing</li>
+                            <li>Team Collaboration</li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="/solutions-b2b.html" class="btn btn--secondary btn--small">Explore</a>
+                    </div>
+                </div>
+
+                <!-- Boutique Retail -->
+                <div class="card card--elevated">
+                    <div class="card__header">
+                        <h3 class="card__title">Boutiques & Retail</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Curated inventory management and customer relationship tools for specialty retailers and
+                            boutiques.</p>
+                        <ul style="list-style: none; padding: 0; margin: var(--spacing-lg) 0;">
+                            <li>Inventory Management</li>
+                            <li>Customer Profiles</li>
+                            <li>Sales Analytics</li>
+                            <li>Loyalty Programs</li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="/solutions-boutique.html" class="btn btn--secondary btn--small">Explore</a>
+                    </div>
+                </div>
+
+                <!-- Salons & Spas -->
+                <div class="card card--elevated">
+                    <div class="card__header">
+                        <h3 class="card__title">Salons & Spas</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Appointment scheduling, stylist management, and customer experience tools for wellness
+                            establishments.</p>
+                        <ul style="list-style: none; padding: 0; margin: var(--spacing-lg) 0;">
+                            <li>Appointment Scheduling</li>
+                            <li>Staff Management</li>
+                            <li>Service Catalog</li>
+                            <li>Guest Experience</li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="/solutions-saloons & spas.html" class="btn btn--secondary btn--small">Explore</a>
+
+                    </div>
+                </div>
+
+                <!-- Restaurants -->
+                <div class="card card--elevated">
+                    <div class="card__header">
+                        <h3 class="card__title">Restaurants & Dining</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>Reservation management, menu curation, and guest relationship tools for fine dining
+                            establishments.</p>
+                        <ul style="list-style: none; padding: 0; margin: var(--spacing-lg) 0;">
+                            <li>Reservation System</li>
+                            <li>Menu Management</li>
+                            <li>Guest Profiles</li>
+                            <li>Event Hosting</li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="/solutions-restaurant.html" class="btn btn--secondary btn--small">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTERPRISE INTEGRATIONS -->
+    <section class="section-integrations">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--color-cream); margin-bottom: var(--spacing-xl);">Seamless
+                Enterprise Integrations</h2>
+            <p
+                style="text-align: center; color: rgba(245, 241, 232, 0.8); margin-bottom: var(--spacing-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">
+                Connect your operations directly to industry-standard tools and platforms.
+            </p>
+
+            <div class="integrations-grid">
+                <!-- Google Sheets -->
+                <div class="integration-card">
+                    <div class="integration-icon">📊</div>
+                    <div class="integration-name">Google Sheets</div>
+                    <div class="integration-desc">Sync your data directly to Google Sheets for analysis and reporting
+                    </div>
+                    <ul class="integration-features">
+                        <li>Real-time Data Sync</li>
+                        <li>Automatic Backups</li>
+                        <li>Custom Reports</li>
+                    </ul>
+                    <button class="integration-btn">Connect</button>
+                </div>
+
+                <!-- CRM Integration -->
+                <div class="integration-card">
+                    <div class="integration-icon">👥</div>
+                    <div class="integration-name">CRM Platforms</div>
+                    <div class="integration-desc">Connect to HubSpot, Salesforce, Pipedrive, or your preferred CRM</div>
+                    <ul class="integration-features">
+                        <li>HubSpot CRM</li>
+                        <li>Salesforce</li>
+                        <li>Pipedrive</li>
+                    </ul>
+                    <button class="integration-btn">Setup</button>
+                </div>
+
+                <!-- Email Marketing -->
+                <div class="integration-card">
+                    <div class="integration-icon">✉️</div>
+                    <div class="integration-name">Email Marketing</div>
+                    <div class="integration-desc">Integrate with Mailchimp, ConvertKit, or SendGrid for campaigns</div>
+                    <ul class="integration-features">
+                        <li>Mailchimp Integration</li>
+                        <li>SendGrid Email</li>
+                        <li>Automate Campaigns</li>
+                    </ul>
+                    <button class="integration-btn">Configure</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPS SECTION (Example) -->
+    <section class="section-map" id="locations-section" style="display: none;">
+        <div class="container">
+            <h2 style="margin-bottom: var(--spacing-2xl);">Our Locations</h2>
+
+            <div class="map-container">
+                <div id="map-container" class="map-embed"></div>
+
+                <div class="map-sidebar">
+                    <div class="location-card">
+                        <h4>Main Office</h4>
+                        <p class="location-address">
+                            123 Heritage Street<br>
+                            Premium District, ST 12345<br>
+                            United States
+                        </p>
+                        <div class="location-hours">
+                            <span>Monday - Friday: 9:00 AM - 6:00 PM</span>
+                            <span>Saturday: 10:00 AM - 4:00 PM</span>
+                            <span>Sunday: Closed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOOGLE REVIEWS SECTION -->
+    <section class="section-reviews">
+        <div class="container">
+            <div class="reviews-header">
+                <h2>Trusted by Our Clientele</h2>
+                <div class="rating-badge flex--center">
+                    <div class="rating-value">4.8</div>
+                    <div>
+                        <div class="rating-stars">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <div class="rating-count">Based on 247 reviews</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviews-grid" id="reviews-container">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Alexandra Sterling</div>
+                            <div class="review-date">3 months ago</div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <p class="review-text">"Exceptional platform. The elegance and simplicity combined with powerful
+                        functionality is remarkable."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">David Chen</div>
+                            <div class="review-date">5 months ago</div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <p class="review-text">"Professional, refined, and exactly what our real estate agency needed.
+                        Highly recommend."</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Reverend Thompson</div>
+                            <div class="review-date">2 months ago</div>
+                        </div>
+                        <div class="review-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                    <p class="review-text">"Perfect for managing our congregation. The platform understands our
+                        community needs."</p>
+                </div>
+            </div>
+
+            <div class="google-badge" style="text-align: center; margin-top: var(--spacing-2xl);">
+                <span>Reviews powered by Google</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST SECTION -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-items">
+                <div class="trust-item">
+                    <div class="trust-icon">🔐</div>
+                    <div class="trust-text">Bank-Grade Security</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">⚡</div>
+                    <div class="trust-text">99.9% Uptime</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🌍</div>
+                    <div class="trust-text">150+ Countries</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">👥</div>
+                    <div class="trust-text">24/7 Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA -->
+    <section class="section" style="text-align: center;">
+        <div class="container container--narrow">
+            <h2 style="margin-bottom: var(--spacing-xl);">Connect With Us</h2>
+            <div id="social-links" class="social-links"></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h6>Solutions</h6>
+                <a href="/solution-real-estate.html">Real Estate</a>
+                <a href="/solutions-churches.html">Churches & Ministries</a>
+                <a href="/solutions-pharmacies.html">Pharmacies</a>
+                <a href="/solutions-b2b.html">B2B Services</a>
+            </div>
+            <div class="footer-section">
+                <h6>Company</h6>
+                <a href="/about">About Us</a>
+                <a href="/careers">Careers</a>
+                <a href="/press">Press</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h6>Resources</h6>
+                <a href="/help">Help Center</a>
+                <a href="/blog">Blog</a>
+                <a href="/documentation">Documentation</a>
+                <a href="/api">API Reference</a>
+            </div>
+            <div class="footer-section">
+                <h6>Legal</h6>
+                <a href="/terms">Terms of Service</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/security">Security</a>
+                <a href="/compliance">Compliance</a>
+            </div>
+        </div>
+
+        <div class="footer-social">
+            <div id="footer-social-links" class="social-links flex--center"></div>
+        </div>
+
+        <div class="footer-divider">
+            <p>&copy; 2024 SG.IO Global. All rights reserved. Designed and built with care.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="/assets/js/sg-io-enterprise-app.js"></script>
+
+    <script>
+        // Example social media data
+        window.SOCIAL_LINKS = {
+            instagram: 'https://instagram.com/sgio',
+            linkedin: 'https://linkedin.com/company/sgio',
+            twitter: 'https://twitter.com/sgio',
+            facebook: 'https://facebook.com/sgio',
+            youtube: 'https://youtube.com/@sgio',
+            website: 'https://sgio.global'
+        };
+    </script>
+</body>
+
+</html>

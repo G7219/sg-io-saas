@@ -1,0 +1,123 @@
+version: '3.9'
+
+services:
+  # MySQL Database
+  sg-mysql:
+    image: mysql:8.0-alpine
+    container_name: sg-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_INITDB_SKIP_TZINFO: 'true'
+    ports:
+      - "3306:3306"
+    volumes:
+      - sg_db_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sg-network
+    restart: unless-stopped
+    labels:
+      - "com.sg.io/service=database"
+
+  # Redis Cache
+  sg-redis:
+    image: redis:7-alpine
+    container_name: sg-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - sg_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sg-network
+    restart: unless-stopped
+    labels:
+      - "com.sg.io/service=cache"
+
+  # Node.js Application
+  sg-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        - NODE_ENV=production
+    container_name: sg-app
+    depends_on:
+      sg-mysql:
+        condition: service_healthy
+      sg-redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: ${REDIS_URL}
+      PORT: ${PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      FLUTTERWAVE_SECRET_KEY: ${FLUTTERWAVE_SECRET_KEY}
+      MPESA_API_KEY: ${MPESA_API_KEY}
+      PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+    ports:
+      - "${PORT}:3000"
+    volumes:
+      - ./public:/app/public:ro
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - sg-network
+    restart: unless-stopped
+    labels:
+      - "com.sg.io/service=api"
+
+  # Nginx Reverse Proxy
+  sg-nginx:
+    image: nginx:alpine
+    container_name: sg-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/ssl:/etc/nginx/ssl:ro
+      - ./public:/usr/share/nginx/html:ro
+    depends_on:
+      - sg-app
+    environment:
+      - NGINX_HOST=sg.io
+      - NGINX_PORT=80
+    networks:
+      - sg-network
+    restart: unless-stopped
+    labels:
+      - "com.sg.io/service=proxy"
+
+volumes:
+  sg_db_data:
+    driver: local
+  sg_redis_data:
+    driver: local
+
+networks:
+  sg-network:
+    driver: bridge

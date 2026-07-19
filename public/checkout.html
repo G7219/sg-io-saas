@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SG.IO - Secure Checkout</title>
+    <style>
+        /* Old Money & Quiet Luxury Aesthetics */
+        body {
+            background-color: #f4f4f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .quiet-luxury-checkout {
+            font-family: 'Georgia', 'Playfair Display', serif;
+            color: #2c2c2c;
+            background-color: #fcfcfb;
+            width: 100%;
+            max-width: 500px;
+            padding: 50px 40px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .brand-title {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: normal;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 13px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        .payment-section {
+            margin-bottom: 30px;
+        }
+
+        .section-heading {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            font-weight: bold;
+        }
+
+        .payment-details p {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            margin: 8px 0;
+            color: #4a4a4a;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #eaeaea;
+            padding-bottom: 6px;
+        }
+
+        .payment-details span {
+            font-weight: bold;
+            color: #2c2c2c;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #2c2c2c;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+            color: #2c2c2c;
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .billing-cycle {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 11px;
+            color: #8B3A3A;
+            text-align: right;
+            margin-top: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .concierge-desk {
+            margin-top: 40px;
+            text-align: center;
+            background-color: #f4f4f2;
+            padding: 20px;
+            border: 1px solid #ebebeb;
+        }
+
+        .concierge-desk p {
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .action-button:hover {
+            background-color: #4a4a4a;
+        }
+
+        .action-button:disabled {
+            background-color: #e0e0e0;
+            color: #999;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiet-luxury-checkout">
+        <h2 class="brand-title">SG.IO</h2>
+        <p class="subtitle" id="pageSubtitle">Private Checkout & Secure Transfer</p>
+
+        <!-- Invoice Summary -->
+        <div class="payment-section">
+            <h3 class="section-heading">. Invoice Summary</h3>
+            <div class="payment-details">
+                <p><span>Subscription Plan:</span> <span id="planName">Loading...</span></p>
+                <p><span>Workspace Niche:</span> <span id="nicheName" style="text-transform: capitalize;">...</span></p>
+                <p><span>Amount Due Today:</span> <span id="planPrice">$0.00</span></p>
+            </div>
+            <div class="billing-cycle" id="billingCycleText">Billed Monthly (Every 30 Days)</div>
+        </div>
+
+        <!-- Business Form -->
+        <div class="payment-section">
+            <div class="form-group">
+                <input type="text" id="businessName" placeholder="Enter your Workspace / Brand Name" required
+                    oninput="validateForm()">
+            </div>
+        </div>
+
+        <!-- Mobile Money Payment (HII ITAFICHA KAMA NI TRIAL) -->
+        <div class="payment-section" id="mpesaSection">
+            <h3 class="section-heading">. Mobile Payment Transfer</h3>
+            <div class="payment-details">
+                <p><span>Network:</span> M-Pesa </p>
+                <p><span>Mobile Number:</span> +255799183830</p>
+                <p><span>Account Name:</span> PASCHAL MWANAWIMA</p>
+            </div>
+        </div>
+
+        <!-- Action Desk -->
+        <div class="concierge-desk">
+            <p id="actionInstructions">Kindly complete the transfer via M-Pesa. Once done, forward the receipt to our
+                concierge desk to activate your monthly subscription.</p>
+            <button id="mainActionButton" class="action-button" onclick="executeAction()" disabled>Contact
+                Concierge</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. KUSOMA URL KUTAMBUA KAMA NI TRIAL AU PAY NOW
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedPlan = (urlParams.get('plan') || 'free').toLowerCase();
+        const selectedNiche = (urlParams.get('niche') || 'corporate').toLowerCase();
+        const isTrial = urlParams.get('trial') === 'true'; // Inasoma &trial=true
+
+        // 2. DATABASE YA BEI
+        const planDatabase = {
+            'free': { name: 'Complimentary Tier', price: 0, cycle: 'No Monthly Charges' },
+            'lite': { name: 'Lite Plan', price: 30, cycle: 'Billed Monthly (Every 30 Days)' },
+            'rise': { name: 'Rise Plan', price: 75, cycle: 'Billed Monthly (Every 30 Days)' },
+            'elite': { name: 'Elite Plan', price: 100, cycle: 'Billed Monthly (Every 30 Days)' }
+        };
+
+        const activePlan = planDatabase[selectedPlan] || planDatabase['free'];
+
+        // 3. LOGIC YA KUFICHA M-PESA KAMA NI TRIAL
+        if (isTrial) {
+            // Mteja yupo kwenye Trial Mode
+            document.getElementById('pageSubtitle').innerText = "Workspace Activation";
+            document.getElementById('planPrice').innerText = "$0.00 (Trial)";
+            document.getElementById('billingCycleText').innerText = "Billed after 4 Days";
+
+            // Ficha M-Pesa
+            document.getElementById('mpesaSection').style.display = 'none';
+
+            // Badilisha Maelezo na Kitufe
+            document.getElementById('actionInstructions').innerText = "Your 4-Day Free Trial is ready. Enter your workspace name above to instantly activate your dashboard. No payment required today.";
+            document.getElementById('mainActionButton').innerText = "Activate Free Trial";
+        } else {
+            // Mteja yupo kwenye Pay Now Mode
+            document.getElementById('planPrice').innerText = activePlan.price > 0 ? `$${activePlan.price}.00` : '$0.00';
+            document.getElementById('billingCycleText').innerText = activePlan.cycle;
+        }
+
+        // 4. WEKA MAJINA YA INVOICE
+        document.getElementById('planName').innerText = activePlan.name;
+        document.getElementById('nicheName').innerText = selectedNiche;
+
+        // 5. ZUIA KITUFE KAMA HAJAJAZA JINA
+        function validateForm() {
+            const bName = document.getElementById('businessName').value.trim();
+            document.getElementById('mainActionButton').disabled = bName.length < 2;
+        }
+
+        // 6. EXECUTE ACTION (TRIAL VS WHATSAPP)
+        function executeAction() {
+            const businessName = document.getElementById('businessName').value.trim();
+            const btn = document.getElementById('mainActionButton');
+
+            if (isTrial) {
+                // FLOW YA TRIAL (Inamrusha Dashboard baada ya sekunde 2)
+                btn.innerText = "Activating Workspace...";
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    window.location.href = `/setup-wizard.html?niche=${selectedNiche}&plan=${selectedPlan}&brand=${encodeURIComponent(businessName)}`;
+                }, 2000);
+
+            } else {
+                // FLOW YA PAY NOW (Inampeleka WhatsApp kwa Concierge)
+                const waMessage = `Greetings, Concierge. \n\nI am forwarding my transfer confirmation for the SG.IO ${activePlan.name} ($${activePlan.price}/month). \n\nMy registered workspace is: *${businessName}* (${selectedNiche}). \n\nKindly verify the payment and finalize my dashboard access.`;
+                const encodedMessage = encodeURIComponent(waMessage);
+                const whatsappUrl = `https://wa.me/255740183803?text=${encodedMessage}`;
+
+                window.open(whatsappUrl, '_blank');
+
+                setTimeout(() => {
+                    window.location.href = `/setup-wizard.html?niche=${selectedNiche}&plan=${selectedPlan}&brand=${encodeURIComponent(businessName)}`;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>

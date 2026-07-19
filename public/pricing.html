@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - SG.IO Global</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --forest-green: #2D3E3F;
+            --navy: #1A2F3F;
+            --gold: #D4AF37;
+            --cream: #F5F1E8;
+            --burgundy: #8B3A3A;
+        }
+
+        body {
+            font-family: 'Lora', 'Merriweather', serif;
+            background-color: var(--cream);
+            color: var(--forest-green);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            color: var(--navy);
+            margin-bottom: 40px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .plan-card {
+            background: white;
+            border: 2px solid var(--light-gray);
+            padding: 40px;
+            border-radius: 4px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .plan-name {
+            font-size: 1.8em;
+            color: var(--navy);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .plan-price {
+            font-size: 2.5em;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .plan-period {
+            color: var(--burgundy);
+            margin-bottom: 30px;
+        }
+
+        .plan-features {
+            text-align: left;
+            margin: 30px 0;
+            list-style: none;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .plan-features li:before {
+            content: "✓ ";
+            color: var(--gold);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background-color: var(--navy);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--forest-green);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Simple, Transparent Pricing</h1>
+        <p style="text-align: center; font-size: 1.1em; color: var(--burgundy); margin-bottom: 40px;">
+            Start free. Scale as you grow. Cancel anytime.
+        </p>
+
+        <div class="pricing-grid">
+            <!-- FREE PLAN -->
+            <div class="plan-card">
+                <div class="plan-name">FREE</div>
+                <div class="plan-price">$0</div>
+                <div class="plan-period">Forever free</div>
+                <ul class="plan-features">
+                    <li>50 products</li>
+                    <li>1 location</li>
+                    <li>10,000 AI messages/month</li>
+                    <li>Basic analytics</li>
+                    <li>Community support</li>
+                    <li>Mobile responsive</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='/signup.html'">
+                    Get Started
+                </button>
+            </div>
+
+            <!-- LITE PLAN -->
+            <div class="plan-card">
+                <div class="plan-name">LITE</div>
+                <div class="plan-price">$30</div>
+                <div class="plan-period">per month</div>
+                <ul class="plan-features">
+                    <li>100 products</li>
+                    <li>1 location</li>
+                    <li>50,000 AI messages/month</li>
+                    <li>Payment processing</li>
+                    <li>Email support</li>
+                    <li>Order management</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='/signup.html'">
+                    Start Free Trial
+                </button>
+            </div>
+
+            <!-- RISE PLAN -->
+            <div class="plan-card" style="border-color: var(--gold);">
+                <div class="plan-name" style="color: var(--gold);">RISE ⭐</div>
+                <div class="plan-price">$75</div>
+                <div class="plan-period">per month</div>
+                <ul class="plan-features">
+                    <li>Unlimited products</li>
+                    <li>5 locations (+$10 each)</li>
+                    <li>500,000 AI messages/month</li>
+                    <li>Shipping integration</li>
+                    <li>B2B features</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='/signup.html'">
+                    Start Free Trial
+                </button>
+            </div>
+
+            <!-- ELITE PLAN -->
+            <div class="plan-card">
+                <div class="plan-name">ELITE</div>
+                <div class="plan-price">$100</div>
+                <div class="plan-period">per month</div>
+                <ul class="plan-features">
+                    <li>Unlimited everything</li>
+                    <li>Unlimited locations</li>
+                    <li>Unlimited AI messages</li>
+                    <li>All 3 AI providers</li>
+                    <li>API access</li>
+                    <li>24/7 phone support</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='/signup.html'">
+                    Start Free Trial
+                </button>
+            </div>
+        </div>
+
+        <div
+            style="margin-top: 60px; padding: 40px; background-color: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold);">
+            <h2 style="color: var(--navy); margin-bottom: 20px;">📊 Features Comparison</h2>
+            <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: var(--forest-green); color: white;">
+                        <th style="padding: 15px; text-align: left;">Feature</th>
+                        <th style="padding: 15px;">FREE</th>
+                        <th style="padding: 15px;">LITE</th>
+                        <th style="padding: 15px;">RISE</th>
+                        <th style="padding: 15px;">ELITE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 15px;">Products</td>
+                        <td style="padding: 15px; text-align: center;">50</td>
+                        <td style="padding: 15px; text-align: center;">100</td>
+                        <td style="padding: 15px; text-align: center;">∞</td>
+                        <td style="padding: 15px; text-align: center;">∞</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 15px;">Locations</td>
+                        <td style="padding: 15px; text-align: center;">1</td>
+                        <td style="padding: 15px; text-align: center;">1</td>
+                        <td style="padding: 15px; text-align: center;">5+</td>
+                        <td style="padding: 15px; text-align: center;">∞</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 15px;">AI Messages/Month</td>
+                        <td style="padding: 15px; text-align: center;">10K</td>
+                        <td style="padding: 15px; text-align: center;">50K</td>
+                        <td style="padding: 15px; text-align: center;">500K</td>
+                        <td style="padding: 15px; text-align: center;">∞</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 15px;">Payment Methods</td>
+                        <td style="padding: 15px; text-align: center;">-</td>
+                        <td style="padding: 15px; text-align: center;">3</td>
+                        <td style="padding: 15px; text-align: center;">8+</td>
+                        <td style="padding: 15px; text-align: center;">10+</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px;">Support</td>
+                        <td style="padding: 15px; text-align: center;">Community</td>
+                        <td style="padding: 15px; text-align: center;">Email</td>
+                        <td style="padding: 15px; text-align: center;">Priority</td>
+                        <td style="padding: 15px; text-align: center;">24/7 Phone</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <h3 style="color: var(--navy); margin-bottom: 20px;">Questions?</h3>
+            <p>Email us at <strong>sales@sg.io</strong> or check our <a href="/legal/terms.html"
+                    style="color: var(--burgundy);">full terms</a></p>
+        </div>
+    </div>
+
+    <script src="/assets/js/language.js"></script>
+</body>
+
+</html>

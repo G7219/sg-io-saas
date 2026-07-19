@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SG.IO - Website Setup Wizard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: linear-gradient(135deg, #f5f1e8 0%, #faf8f3 100%);
+            min-height: 100vh;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #1a1a1a;
+        }
+
+        .wizard-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* SIDEBAR - PROGRESS */
+        .wizard-sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #1a2f3f 0%, #2d3e3f 100%);
+            color: white;
+            padding: 40px 30px;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .wizard-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .wizard-subtitle {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #b8860b;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .steps-list {
+            list-style: none;
+        }
+
+        .step-item {
+            padding: 16px 0;
+            border-left: 3px solid transparent;
+            padding-left: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .step-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #b8860b;
+        }
+
+        .step-item.completed {
+            color: #b8860b;
+            border-left-color: #b8860b;
+        }
+
+        .step-item.active {
+            background: rgba(184, 134, 11, 0.2);
+            color: white;
+            border-left-color: #b8860b;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .step-item.completed .step-number {
+            background: #b8860b;
+        }
+
+        .step-item.active .step-number {
+            background: #b8860b;
+        }
+
+        /* MAIN CONTENT */
+        .wizard-main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wizard-step {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 800px;
+        }
+
+        .wizard-step.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a2f3f;
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* FORM GROUPS */
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e0dcd3;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #b8860b;
+            box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* GPS LOCATION SECTION */
+        .location-section {
+            background: #f8f7f4;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0dcd3;
+            margin-bottom: 20px;
+        }
+
+        .location-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .btn-location {
+            padding: 10px 16px;
+            background: #1a2f3f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-location:hover {
+            background: #0f1f2d;
+        }
+
+        .location-status {
+            font-size: 12px;
+            color: #666;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .location-status.success {
+            color: #2d6a2d;
+            background: #e8f5e9;
+        }
+
+        .location-status.error {
+            color: #8b3a3a;
+            background: #ffebee;
+        }
+
+        .location-status.loading {
+            color: #b8860b;
+            background: #fff8e1;
+        }
+
+        .location-coords {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .coord-input {
+            position: relative;
+        }
+
+        .coord-label {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .coord-input input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+
+        /* RADIO/CHECKBOX */
+        .form-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 14px;
+            border: 1px solid #e0dcd3;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-item:hover {
+            border-color: #b8860b;
+            background: rgba(184, 134, 11, 0.05);
+        }
+
+        .option-item.selected {
+            border-color: #b8860b;
+            background: rgba(184, 134, 11, 0.1);
+        }
+
+        .option-item input {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        /* UPLOAD SECTION */
+        .upload-area {
+            border: 2px dashed #e0dcd3;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f7f4;
+        }
+
+        .upload-area:hover {
+            border-color: #b8860b;
+            background: rgba(184, 134, 11, 0.05);
+        }
+
+        .upload-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .upload-subtext {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .preview-image {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* BUTTONS */
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e0dcd3;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid #e0dcd3;
+            color: #1a1a1a;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f7f4;
+            border-color: #b8860b;
+        }
+
+        .btn-primary {
+            background: #1a2f3f;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #0f1f2d;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* SUCCESS STATE */
+        .success-message {
+            background: #e8f5e9;
+            border-left: 4px solid #2d6a2d;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            color: #2d6a2d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .success-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        /* PREVIEW */
+        .website-preview {
+            background: white;
+            border: 1px solid #e0dcd3;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .preview-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a2f3f;
+            margin-bottom: 20px;
+        }
+
+        .preview-tagline {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0dcd3;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .wizard-container {
+                flex-direction: column;
+            }
+
+            .wizard-sidebar {
+                width: 100%;
+                padding: 30px 20px;
+                max-height: 120px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .wizard-main {
+                padding: 30px 20px;
+            }
+
+            .step-title {
+                font-size: 24px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .location-coords {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- setup-wizard.html -->
+
+    <!-- 1. UNIVERSAL FIELDS (Visible to all users) -->
+    <div class="setup-section" id="universal-step">
+        <h2>Basic Information</h2>
+        <input type="text" name="businessName" placeholder="Business Name">
+        <input type="email" name="contactEmail" placeholder="Business Email">
+    </div>
+
+    <!-- 2. NICHE-SPECIFIC CONTAINER -->
+    <div class="setup-section" id="niche-step">
+        <h2>Operations Setup</h2>
+
+        <!-- SALON SPECIFIC -->
+        <div id="fields-salon" class="dynamic-niche-block" style="display: none;">
+            <label>Number of Stylists</label>
+            <select name="stylistCount">
+                <option>1-3</option>
+                <option>4-10</option>
+            </select>
+            <label>Booking Interval</label>
+            <select name="bookingInterval">
+                <option>30 Minutes</option>
+                <option>1 Hour</option>
+            </select>
+        </div>
+
+        <!-- BOUTIQUE / E-COMMERCE SPECIFIC -->
+        <div id="fields-boutique" class="dynamic-niche-block" style="display: none;">
+            <label>Primary Inventory Type</label>
+            <select name="inventoryType">
+                <option>Apparel</option>
+                <option>Accessories</option>
+            </select>
+            <label>Shipping Regions</label>
+            <select name="shippingRegions">
+                <option>Domestic Only</option>
+                <option>International</option>
+            </select>
+        </div>
+
+        <!-- CORPORATE / B2B SPECIFIC -->
+        <div id="fields-b2b" class="dynamic-niche-block" style="display: none;">
+            <label>Tax Identification Number</label>
+            <input type="text" name="taxId" placeholder="TIN">
+            <label>Wholesale Discount Tier</label>
+            <select name="wholesaleTier">
+                <option>Standard (10%)</option>
+                <option>Premium (20%)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 3. PREMIUM PLAN UPSELL / EXCLUSIVES -->
+    <div id="premium-features" style="display: none;">
+        <h2>Advanced Configuration</h2>
+        <!-- Premium features load here -->
+    </div>
+
+    <button id="complete-setup-btn">Complete Configuration</button>
+
+    <div class="wizard-container">
+
+        <!-- SIDEBAR -->
+        <aside class="wizard-sidebar">
+            <div class="wizard-header">Setup</div>
+            <div class="wizard-subtitle">Complete Your Website</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <ul class="steps-list" id="stepsList">
+                <li class="step-item active" onclick="goToStep(1)">
+                    <span class="step-number">1</span>
+                    Profile Setup
+                </li>
+                <li class="step-item" onclick="goToStep(2)">
+                    <span class="step-number">2</span>
+                    Business Details
+                </li>
+                <li class="step-item" onclick="goToStep(3)">
+                    <span class="step-number">3</span>
+                    Branding
+                </li>
+                <li class="step-item" onclick="goToStep(4)">
+                    <span class="step-number">4</span>
+                    Services
+                </li>
+                <li class="step-item" onclick="goToStep(5)">
+                    <span class="step-number">5</span>
+                    Contact & Location
+                </li>
+                <li class="step-item" onclick="goToStep(6)">
+                    <span class="step-number">6</span>
+                    Social Media
+                </li>
+                <li class="step-item" onclick="goToStep(7)">
+                    <span class="step-number">7</span>
+                    Launch Website
+                </li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="wizard-main">
+
+            <!-- STEP 1: PROFILE SETUP -->
+            <div class="wizard-step active" id="step-1">
+                <h1 class="step-title">Profile Setup</h1>
+                <p class="step-description">Let's get your basic information ready</p>
+
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" id="fullName" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" id="email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" id="phone" placeholder="+254 712 345 678" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Country</label>
+                    <select class="form-select" id="country" required>
+                        <option value="">Select your country</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Tanzania">Tanzania</option>
+                        <option value="Uganda">Uganda</option>
+                        <option value="Rwanda">Rwanda</option>
+                        <option value="Other">Other East African Country</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="goToStep(0)">Exit Setup</button>
+                    <button class="btn btn-primary" onclick="nextStep(1)">Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: BUSINESS DETAILS -->
+            <div class="wizard-step" id="step-2">
+                <h1 class="step-title">Business Details</h1>
+                <p class="step-description">Tell us about your business</p>
+
+                <div class="form-group">
+                    <label class="form-label">Business Name</label>
+                    <input type="text" class="form-input" id="businessName" placeholder="Your business name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Business Description</label>
+                    <textarea class="form-textarea" id="businessDesc"
+                        placeholder="What does your business do? (100-200 words)" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Years in Business</label>
+                    <select class="form-select" id="yearsInBusiness" required>
+                        <option value="">Select years</option>
+                        <option value="0-1">Less than 1 year</option>
+                        <option value="1-3">1-3 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="5+">5+ years</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Service Area</label>
+                    <input type="text" class="form-input" id="serviceArea"
+                        placeholder="e.g., Nairobi, East Africa, Online" required>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(2)">Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: BRANDING -->
+            <div class="wizard-step" id="step-3">
+                <h1 class="step-title">Branding</h1>
+                <p class="step-description">Upload your logo and define your brand colors</p>
+
+                <div class="form-group">
+                    <label class="form-label">Business Logo</label>
+                    <div class="upload-area" onclick="document.getElementById('logoInput').click()">
+                        <div class="upload-text">Click to upload logo</div>
+                        <div class="upload-subtext">PNG, JPG, SVG up to 5MB</div>
+                        <input type="file" class="upload-input" id="logoInput" accept="image/*"
+                            onchange="previewLogo()">
+                    </div>
+                    <img id="logoPreview" class="preview-image" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Brand Color (Primary)</label>
+                    <input type="color" class="form-input" id="brandColor" value="#1a2f3f" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Brand Tagline</label>
+                    <input type="text" class="form-input" id="tagline" placeholder="Your brand motto or tagline"
+                        maxlength="100">
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 4: SERVICES -->
+            <div class="wizard-step" id="step-4">
+                <h1 class="step-title">Services</h1>
+                <p class="step-description">List your main offerings</p>
+
+                <div id="servicesContainer">
+                    <div class="form-group">
+                        <label class="form-label">Service 1</label>
+                        <input type="text" class="form-input service-input" placeholder="e.g., Menu Management"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Service 2</label>
+                        <input type="text" class="form-input service-input" placeholder="e.g., Online Ordering">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Service 3</label>
+                        <input type="text" class="form-input service-input" placeholder="e.g., Delivery Integration">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Price Range (if applicable)</label>
+                    <select class="form-select" id="priceRange">
+                        <option value="">Select range</option>
+                        <option value="budget">Budget Friendly</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="premium">Premium</option>
+                        <option value="luxury">Luxury</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="goToStep(3)">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(4)">Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 5: CONTACT & LOCATION -->
+            <div class="wizard-step" id="step-5">
+                <h1 class="step-title">Contact & Location</h1>
+                <p class="step-description">How customers can reach you and where you are</p>
+
+                <div class="form-group">
+                    <label class="form-label">Physical Address</label>
+                    <input type="text" class="form-input" id="address" placeholder="Street address" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">City</label>
+                    <input type="text" class="form-input" id="city" placeholder="City" required>
+                </div>
+
+                <!-- GPS LOCATION SECTION -->
+                <div class="location-section">
+                    <label class="form-label">Location Coordinates</label>
+                    <div class="location-controls">
+                        <button type="button" class="btn-location" onclick="captureLocation()">Use GPS Location</button>
+                        <button type="button" class="btn-location" onclick="captureLocationIP()">Auto-Detect
+                            Location</button>
+                    </div>
+                    <div class="location-status" id="locationStatus">Click button to capture location</div>
+
+                    <div class="location-coords">
+                        <div class="coord-input">
+                            <span class="coord-label">Latitude</span>
+                            <input type="text" id="latitude" placeholder="e.g., -1.2921" readonly>
+                        </div>
+                        <div class="coord-input">
+                            <span class="coord-label">Longitude</span>
+                            <input type="text" id="longitude" placeholder="e.g., 36.8219" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Website (Optional)</label>
+                    <input type="url" class="form-input" id="website" placeholder="https://yourwebsite.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Operating Hours</label>
+                    <input type="text" class="form-input" id="hours" placeholder="e.g., Mon-Fri 9AM-6PM, Sat 10AM-4PM">
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="goToStep(4)">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(5)">Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 6: SOCIAL MEDIA -->
+            <div class="wizard-step" id="step-6">
+                <h1 class="step-title">Social Media</h1>
+                <p class="step-description">Connect your social media accounts</p>
+
+                <div class="form-group">
+                    <label class="form-label">Instagram</label>
+                    <input type="text" class="form-input" id="instagram" placeholder="@yourinstagram or full URL">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Facebook</label>
+                    <input type="text" class="form-input" id="facebook" placeholder="Facebook URL">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">TikTok</label>
+                    <input type="text" class="form-input" id="tiktok" placeholder="@yourtiktok">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Twitter/X</label>
+                    <input type="text" class="form-input" id="twitter" placeholder="@yourhandle">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">YouTube</label>
+                    <input type="text" class="form-input" id="youtube" placeholder="YouTube channel URL">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">LinkedIn</label>
+                    <input type="text" class="form-input" id="linkedin" placeholder="LinkedIn profile URL">
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="goToStep(5)">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(6)">Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 7: LAUNCH -->
+            <div class="wizard-step" id="step-7">
+                <h1 class="step-title">Launch Your Website</h1>
+                <p class="step-description">Your website is ready to go live</p>
+
+                <div class="success-message">
+                    <div class="success-title">Website Setup Complete</div>
+                    Your website has been customized with all the information you provided. Click the button below to
+                    launch it and make it visible to the world.
+                </div>
+
+                <div class="website-preview" id="websitePreview">
+                    <div class="preview-logo" id="previewLogo">Your Business</div>
+                    <div class="preview-tagline" id="previewTagline">Professional online presence</div>
+                    <div style="font-size: 13px; color: #666; line-height: 1.8;">
+                        <p><strong>Services:</strong> <span id="previewServices">Loading...</span></p>
+                        <p><strong>Location:</strong> <span id="previewLocation">Loading...</span></p>
+                        <p><strong>Contact:</strong> <span id="previewPhone">Loading...</span></p>
+                    </div>
+                </div>
+                <div class="launch-controls" style="margin-top: 25px; padding: 20px; border-top: 1px solid #eee;">
+                    <label for="brandColor" style="display: block; margin-bottom: 10px;">Select your Brand
+                        Color:</label>
+                    <input type="color" id="brandColor" value="#C5A880">
+
+                    <button type="button" onclick="launchWebsite()" id="complete-step-btn"
+                        style="margin-left: 15px;">Launch
+                        Workspace</button>
+                </div>
+
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="goToStep(6)">Back to Previous</button>
+                <button class="btn btn-primary" onclick="launchWebsite()">Launch Website Now</button>
+            </div>
+    </div>
+
+    </main>
+
+    </div>
+
+    <script>
+        // GLOBALS ZOTE ZIMETOLEWA NJE
+        let currentStep = 1;
+        const totalSteps = 7;
+        const wizardData = {};
+
+        // ========== LOCATION CAPTURE ==========
+        function captureLocation() {
+            const statusEl = document.getElementById('locationStatus');
+
+            if (!navigator.geolocation) {
+                statusEl.textContent = 'Geolocation not supported by your browser';
+                statusEl.className = 'location-status error';
+                return;
+            }
+
+            statusEl.textContent = 'Getting your location...';
+            statusEl.className = 'location-status loading';
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude.toFixed(4);
+                    const lng = position.coords.longitude.toFixed(4);
+
+                    document.getElementById('latitude').value = lat;
+                    document.getElementById('longitude').value = lng;
+
+                    statusEl.textContent = 'Location captured successfully';
+                    statusEl.className = 'location-status success';
+                },
+                (error) => {
+                    let errorMsg = 'Unable to get location: ' + error.message;
+                    if (error.code === error.PERMISSION_DENIED) {
+                        errorMsg = 'Location permission denied. Please enable location in browser settings.';
+                    }
+                    statusEl.textContent = errorMsg;
+                    statusEl.className = 'location-status error';
+                }
+            );
+        }
+
+        function captureLocationIP() {
+            const statusEl = document.getElementById('locationStatus');
+            statusEl.textContent = 'Detecting location from IP...';
+            statusEl.className = 'location-status loading';
+
+            // Use free IP geolocation service
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const lat = data.latitude.toFixed(4);
+                    const lng = data.longitude.toFixed(4);
+
+                    document.getElementById('latitude').value = lat;
+                    document.getElementById('longitude').value = lng;
+
+                    // Also update city if not set
+                    if (!document.getElementById('city').value) {
+                        document.getElementById('city').value = data.city;
+                    }
+
+                    statusEl.textContent = 'Location detected: ' + data.city + ', ' + data.country_name;
+                    statusEl.className = 'location-status success';
+
+                })
+                .catch(error => {
+                    statusEl.textContent = 'Could not detect location. Please enter manually.';
+                    statusEl.className = 'location-status error';
+                });
+        }
+
+        // ========== NAVIGATION ==========
+        function goToStep(step) {
+            if (step === 0) {
+                if (confirm('Are you sure? Your progress will not be saved.')) {
+                    window.location.href = '/dashboard';
+                }
+                return;
+            }
+
+            if (step >= 1 && step <= totalSteps) {
+                currentStep = step;
+                updateUI();
+            }
+        }
+
+        function nextStep(currentStepNum) {
+            if (validateStep(currentStepNum)) {
+                saveStepData(currentStepNum);
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateUI();
+                    window.scrollTo(0, 0);
+                }
+            }
+        }
+
+        function updateUI() {
+            document.querySelectorAll('.wizard-step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+
+            document.querySelectorAll('.step-item').forEach((item, index) => {
+                item.classList.remove('active', 'completed');
+                if (index + 1 < currentStep) {
+                    item.classList.add('completed');
+                } else if (index + 1 === currentStep) {
+                    item.classList.add('active');
+                }
+            });
+
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            if (currentStep === 7) {
+                updatePreview();
+            }
+        }
+
+        // ========== VALIDATION ==========
+        function validateStep(step) {
+            const inputs = document.querySelectorAll(`#step-${step} [required]`);
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#8b3a3a';
+                    isValid = false;
+                    setTimeout(() => input.style.borderColor = '', 2000);
+                }
+            });
+
+            return isValid;
+        }
+
+        // ========== SAVE DATA ==========
+        function saveStepData(step) {
+            const stepData = {};
+            const inputs = document.querySelectorAll(`#step-${step} input, #step-${step} textarea, #step-${step} select`);
+
+            inputs.forEach(input => {
+                if (input.id) {
+                    stepData[input.id] = input.value;
+                }
+            });
+
+            Object.assign(wizardData, stepData);
+        }
+
+        // ========== FILE UPLOAD ==========
+        function previewLogo() {
+            const input = document.getElementById('logoInput');
+            const preview = document.getElementById('logoPreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ========== PREVIEW UPDATE ==========
+        function updatePreview() {
+            document.getElementById('previewLogo').textContent =
+                wizardData.businessName || 'Your Business';
+            document.getElementById('previewTagline').textContent =
+                wizardData.tagline || 'Professional online presence';
+
+            const services = Array.from(document.querySelectorAll('.service-input'))
+                .filter(input => input.value)
+                .map(input => input.value)
+                .join(', ') || 'Loading...';
+            document.getElementById('previewServices').textContent = services;
+
+            document.getElementById('previewLocation').textContent =
+                (wizardData.city || 'Your City') + ', ' + (wizardData.country || 'Country');
+            document.getElementById('previewPhone').textContent =
+                wizardData.phone || '+254 712 345 678';
+        }
+
+        // ========== LAUNCH WEBSITE ==========
+        function launchWebsite() {
+            function completeSetup() {
+                // 1. Get the color selected by the user
+                const selectedColor = document.getElementById('brandColor').value;
+
+                // 2. Save it to browser storage
+                localStorage.setItem('userPrimaryColor', selectedColor);
+
+                // 3. Get the original URL parameters (niche, plan, brand)
+                const currentParams = window.location.search;
+
+                // 4. Redirect to Dashboard with the original parameters
+                window.location.href = `/dashboard.html${currentParams}`;
+            }
+
+            // Note: Nimetumia id 'complete-step-btn' badala ya event.target ili kuzuia error.
+            const btn = document.getElementById('complete-step-btn');
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = 'Launching...';
+            }
+
+            saveStepData(currentStep);
+
+            setTimeout(() => {
+                fetch('/api/v1/website/launch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(wizardData)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && btn) {
+                            btn.textContent = 'Website Live';
+                            btn.style.background = '#2d6a2d';
+
+                            setTimeout(() => {
+                                window.location.href = data.websiteUrl || '/dashboard';
+                            }, 2000);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Launch error:', err);
+                        alert('Error launching website. Please try again.');
+                        if (btn) {
+                            btn.disabled = false;
+                            btn.textContent = 'Launch Website Now';
+                        }
+                    });
+            }, 2000);
+        }
+
+        // ========== DOM CONTENT LOADED (Inabaki mwisho) ==========
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. Extract parameters from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentNiche = urlParams.get('niche');
+            const currentPlan = urlParams.get('plan');
+
+            // 2. Reset the view (Hide all dynamic blocks)
+            const allNicheBlocks = document.querySelectorAll('.dynamic-niche-block');
+            allNicheBlocks.forEach(block => {
+                block.style.display = 'none';
+            });
+
+            // 3. Render Niche-Specific Fields
+            if (currentNiche) {
+                const targetBlock = document.getElementById(`fields-${currentNiche}`);
+                if (targetBlock) {
+                    targetBlock.style.display = 'block';
+                } else {
+                    console.warn("Niche not recognized. Defaulting to standard setup.");
+                }
+            }
+
+            // 4. Render Plan-Specific Features (Premium Access)
+            const premiumSection = document.getElementById('premium-features');
+            if (currentPlan === 'rise') {
+                if (premiumSection) {
+                    premiumSection.style.display = 'block';
+                }
+            }
+
+            // 5. Handle Final Submission
+            const completeButton = document.getElementById('complete-setup-btn');
+            if (completeButton) {
+                completeButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // Kutumia currentNiche badala ya niche kuzuia error
+                    const targetDashboard = `dashboard.html?niche=${currentNiche}&plan=${currentPlan}`;
+                    window.location.href = targetDashboard;
+                });
+            }
+
+            // Initialize UI
+            updateUI();
+
+            document.getElementById('businessName')?.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !document.getElementById('mainActionButton')?.disabled) {
+                    nextStep(currentStep);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

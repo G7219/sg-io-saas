@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management with AI SEO - SG.IO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Garamond', serif;
+            background: linear-gradient(135deg, #F5F1E8 0%, #E8E3D8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2D3E3F;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            color: #2D3E3F;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #D4AF37;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #2D3E3F;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #D4AF37;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2D3E3F;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #D4AF37;
+            border-radius: 4px;
+            font-family: Georgia, serif;
+            font-size: 14px;
+            color: #2D3E3F;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #2D3E3F;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Georgia, serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #D4AF37;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #C29B2E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+        }
+
+        .btn-secondary:hover {
+            background: #D4AF37;
+            color: white;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .upload-area {
+            border: 3px dashed #D4AF37;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #F9F9F9;
+        }
+
+        .upload-area:hover {
+            background: #F0F0F0;
+            border-color: #2D3E3F;
+        }
+
+        .upload-area.dragover {
+            background: #E8E3D8;
+            border-color: #2D3E3F;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .seo-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #D4AF37;
+        }
+
+        .seo-item {
+            background: #F9F9F9;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #D4AF37;
+            border-radius: 4px;
+        }
+
+        .seo-item h4 {
+            color: #2D3E3F;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .seo-item p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .keyword {
+            background: #D4AF37;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .score-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #2D3E3F 0%, #1A2F3F 100%);
+            color: white;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2D3E3F;
+            flex-shrink: 0;
+        }
+
+        .score-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .score-info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #D4AF37;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .message {
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .message.error {
+            background: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #D4AF37;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: Georgia, serif;
+            color: #2D3E3F;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #D4AF37;
+            border-bottom-color: #D4AF37;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .score-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI-Powered Product Manager</h1>
+            <p>Upload images • Auto-generate descriptions • Optimize for SEO</p>
+        </div>
+
+        <div class="message" id="message"></div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('add-product')">Add Product</button>
+            <button class="tab-btn" onclick="switchTab('manage-products')">Manage Products</button>
+        </div>
+
+        <!-- Add Product Tab -->
+        <div id="add-product" class="tab-content active">
+            <div class="card">
+                <h2>📝 Add New Product</h2>
+
+                <form id="productForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div class="form-group">
+                            <label>Product Name *</label>
+                            <input type="text" id="productName" placeholder="Enter product name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="category" required>
+                                <option value="">Select category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Beauty">Beauty</option>
+                                <option value="Home">Home & Garden</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Niche Type *</label>
+                            <select id="nicheType" required>
+                                <option value="">Select niche</option>
+                                <option value="pharmacy">Pharmacy</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="realestate">Real Estate</option>
+                                <option value="salon">Salon</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Price ($)</label>
+                            <input type="number" id="price" placeholder="Enter price" min="0" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Optional - AI can generate)</label>
+                        <textarea id="description"
+                            placeholder="Enter product description or let AI generate it"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Product Images *</label>
+                        <div class="upload-area" id="uploadArea"
+                            onclick="document.getElementById('imageInput').click()">
+                            <p>📁 Click to upload or drag and drop</p>
+                            <small>Upload 1-10 images (Max 5MB each)</small>
+                            <input type="file" id="imageInput" accept="image/*" multiple>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" onclick="addProduct()">
+                            <span id="submitText">Add Product with AI SEO</span>
+                            <span id="loadingSpinner" style="display: none;" class="loading"></span>
+                        </button>
+                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="seoPreview" class="card" style="display: none;">
+                <h2>✨ AI-Generated SEO Content</h2>
+
+                <div class="seo-section">
+                    <div class="seo-item">
+                        <h4>📝 Product Description</h4>
+                        <p id="previewDescription"></p>
+                    </div>
+
+                    <div class="seo-item">
+                        <h4>🔍 Meta Title</h4>
+                        <p id="previewMetaTitle"></p>
+                    </div>
+
+                    <div class="seo-item">
+                        <h4>📄 Meta Description</h4>
+                        <p id="previewMetaDesc"></p>
+                    </div>
+
+                    <div class="seo-item">
+                        <h4>🏷️ Keywords</h4>
+                        <div class="keywords" id="previewKeywords"></div>
+                    </div>
+
+                    <div class="seo-item">
+                        <h4>🎯 Long Tail Keywords</h4>
+                        <div class="keywords" id="previewLongTail"></div>
+                    </div>
+
+                    <div class="seo-item">
+                        <h4>💬 Alt Text</h4>
+                        <p id="previewAltText"></p>
+                    </div>
+                </div>
+
+                <div id="seoScore"></div>
+            </div>
+        </div>
+
+        <!-- Manage Products Tab -->
+        <div id="manage-products" class="tab-content">
+            <div class="card">
+                <h2>📋 My Products</h2>
+                <div id="productsList" style="margin-top: 20px;">
+                    <p style="text-align: center; color: #999;">Loading products...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'manage-products') {
+                loadProducts();
+            }
+        }
+
+        // Message display
+        function showMessage(message, type) {
+            const msgEl = document.getElementById('message');
+            msgEl.textContent = message;
+            msgEl.className = `message ${type} show`;
+            setTimeout(() => msgEl.classList.remove('show'), 4000);
+        }
+
+        // File upload
+        const uploadArea = document.getElementById('uploadArea');
+        const imageInput = document.getElementById('imageInput');
+
+        uploadArea.addEventListener('dragover', e => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            imageInput.files = e.dataTransfer.files;
+        });
+
+        // Add product with AI SEO
+        async function addProduct() {
+            const productName = document.getElementById('productName').value;
+            const category = document.getElementById('category').value;
+            const nicheType = document.getElementById('nicheType').value;
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+            const files = imageInput.files;
+
+            if (!productName || !category || !nicheType) {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+
+            if (files.length === 0) {
+                showMessage('Please select at least one image', 'error');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('submitText').style.display = 'none';
+            document.getElementById('loadingSpinner').style.display = 'inline-block';
+
+            try {
+                // Create product
+                const productRes = await fetch('/api/v1/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: productName,
+                        category,
+                        niche_type: nicheType,
+                        price: parseFloat(price),
+                        description
+                    })
+                });
+
+                const productData = await productRes.json();
+                if (!productData.success) {
+                    showMessage('Failed to create product', 'error');
+                    return;
+                }
+
+                const productId = productData.data.id;
+
+                // Upload images with AI SEO
+                const formData = new FormData();
+                for (let file of files) {
+                    formData.append('images', file);
+                }
+                formData.append('productName', productName);
+                formData.append('category', category);
+                formData.append('nicheType', nicheType);
+                formData.append('price', price);
+
+                const uploadRes = await fetch(`/api/v1/images/product/${productId}/ai-bulk`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const uploadData = await uploadRes.json();
+
+                if (uploadData.success) {
+                    // Display SEO preview
+                    const seoData = uploadData.data.seo;
+                    if (seoData) {
+                        displaySEOPreview(seoData);
+                    }
+
+                    showMessage(`Product created! ${files.length} images uploaded with AI SEO optimization.`, 'success');
+                    document.getElementById('productForm').reset();
+                } else {
+                    showMessage('Upload failed: ' + uploadData.error, 'error');
+                }
+            } catch (error) {
+                showMessage('Error: ' + error.message, 'error');
+            } finally {
+                document.getElementById('submitText').style.display = 'inline';
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
+        }
+
+        // Display SEO preview
+        function displaySEOPreview(seoData) {
+            document.getElementById('previewDescription').textContent = seoData.description;
+            document.getElementById('previewMetaTitle').textContent = seoData.metaTitle;
+            document.getElementById('previewMetaDesc').textContent = seoData.metaDescription;
+            document.getElementById('previewAltText').textContent = seoData.altText;
+
+            // Display keywords
+            const keywordsHtml = seoData.keywords.map(k => `<span class="keyword">${k}</span>`).join('');
+            document.getElementById('previewKeywords').innerHTML = keywordsHtml;
+
+            // Display long tail keywords
+            const longTailHtml = seoData.longTailKeywords.map(k => `<span class="keyword">${k}</span>`).join('');
+            document.getElementById('previewLongTail').innerHTML = longTailHtml;
+
+            // Display SEO score
+            if (seoData.seoScore) {
+                const score = seoData.seoScore;
+                document.getElementById('seoScore').innerHTML = `
+                    <div class="score-box">
+                        <div class="score-circle">${score.score}</div>
+                        <div class="score-info">
+                            <h3>${score.rating} SEO Score</h3>
+                            <p>Your product is optimized for search engines!</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('seoPreview').style.display = 'block';
+        }
+
+        // Load products
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/v1/products');
+                const data = await response.json();
+
+                if (data.success) {
+                    const products = data.data;
+                    const html = products.map(p => `
+                        <div class="card" style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <h3 style="margin-bottom: 5px;">${p.name}</h3>
+                                    <p style="color: #999; font-size: 14px; margin-bottom: 10px;">
+                                        ${p.category} • $${p.price}
+                                    </p>
+                                    <p style="color: #666; font-size: 14px; line-height: 1.6;">
+                                        ${p.description ? p.description.substring(0, 150) + '...' : 'No description'}
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" onclick="editProduct('${p.id}')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    document.getElementById('productsList').innerHTML = html || '<p style="text-align: center; color: #999;">No products yet</p>';
+                }
+            } catch (error) {
+                showMessage('Error loading products: ' + error.message, 'error');
+            }
+        }
+
+        function editProduct(productId) {
+            showMessage('Edit feature coming soon', 'error');
+        }
+
+        // Load products on page load
+        window.addEventListener('load', loadProducts);
+    </script>
+</body>
+
+</html>

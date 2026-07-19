@@ -1,0 +1,206 @@
+< !DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="SG.IO - Responsive Multi-Tenant SaaS Platform"><title>SG.IO - Responsive Dashboard</title><link rel="stylesheet" href="/assets/css/responsive.css"><style>
+
+/* Additional custom styles */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: clamp(28px, 6vw, 42px);
+    font-weight: 600;
+    margin: var(--spacing-md) 0;
+}
+
+.stat-label {
+    font-size: clamp(14px, 2vw, 16px);
+    opacity: 0.9;
+}
+
+.sidebar {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    width: 250px;
+    height: calc(100vh - 60px);
+    background: var(--light-gray);
+    overflow-y: auto;
+    z-index: 99;
+    transition: transform 0.3s ease;
+}
+
+.sidebar.show {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: relative;
+        top: 0;
+        display: block;
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+}
+
+.sidebar-item {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border);
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.sidebar-item:hover {
+    background: white;
+    border-left: 4px solid var(--accent);
+    padding-left: calc(var(--spacing-md) - 4px);
+}
+
+.sidebar-item.active {
+    background: white;
+    border-left: 4px solid var(--accent);
+    padding-left: calc(var(--spacing-md) - 4px);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .content-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.responsive-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+@media (min-width: 480px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Badge responsive */
+.badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--accent);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Progress bar */
+.progress {
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: var(--spacing-md) 0;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--accent);
+    width: 65%;
+    border-radius: 4px;
+}
+
+</style></head><body>< !-- Navigation --><nav class="navbar"><div class="navbar-brand">🚀 SG.IO</div><button class="nav-toggle" id="navToggle">☰</button><div class="nav-menu" id="navMenu"><a href="#" class="nav-item">Dashboard</a><a href="#" class="nav-item">Products</a><a href="#" class="nav-item">Orders</a><a href="#" class="nav-item">Analytics</a><a href="#" class="nav-item">Settings</a><a href="#" class="nav-item">Logout</a></div></nav>< !-- Main Container --><div class="container-fluid" style="display: flex; min-height: calc(100vh - 60px);">< !-- Sidebar --><aside class="sidebar" id="sidebar"><div class="sidebar-item active">📊 Dashboard</div><div class="sidebar-item">📦 Products</div><div class="sidebar-item">📋 Orders</div><div class="sidebar-item">📈 Analytics</div><div class="sidebar-item">⚙️ Settings</div><div class="sidebar-item">🎨 Branding</div><div class="sidebar-item">🤖 AI Tools</div><div class="sidebar-item">💬 Messages</div></aside>< !-- Main Content --><main class="main-content" style="flex: 1; padding: var(--spacing-lg);">< !-- Header --><div class="flex flex-between" style="margin-bottom: var(--spacing-lg);"><div><h1>Welcome Back ! 👋</h1><p class="text-muted">Monday,
+December 18,
+2024</p></div><button class="btn btn-primary">+Add Product</button></div>< !-- Stats Dashboard --><div class="dashboard-grid"><div class="stat-card"><div class="stat-label">Total Sales</div><div class="stat-number">$12,
+450</div><div class="stat-label">↑ 12% from last month</div></div><div class="stat-card"><div class="stat-label">Orders</div><div class="stat-number">348</div><div class="stat-label">↑ 8% from last month</div></div><div class="stat-card"><div class="stat-label">Customers</div><div class="stat-number">1,
+247</div><div class="stat-label">↑ 15% from last month</div></div><div class="stat-card"><div class="stat-label">Conversion</div><div class="stat-number">3.2%</div><div class="stat-label">↑ 0.5% from last month</div></div></div>< !-- Content Grid --><div class="content-grid" style="margin-top: var(--spacing-xxl);">< !-- Recent Orders --><div class="card"><div class="card-header"><h2>Recent Orders</h2></div><div class="responsive-table"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td data-label="Order ID">#12345</td><td data-label="Customer">John Doe</td><td data-label="Amount">$245.00</td><td data-label="Status"><span class="badge">Shipped</span></td></tr><tr><td data-label="Order ID">#12344</td><td data-label="Customer">Jane Smith</td><td data-label="Amount">$189.50</td><td data-label="Status"><span class="badge">Processing</span></td></tr><tr><td data-label="Order ID">#12343</td><td data-label="Customer">Bob Johnson</td><td data-label="Amount">$456.75</td><td data-label="Status"><span class="badge">Delivered</span></td></tr></tbody></table></div></div>< !-- Sales Analytics --><div class="card"><div class="card-header"><h2>Performance</h2></div><div style="margin-bottom: var(--spacing-lg);"><div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm);"><span>Product Sales</span><span class="text-bold">78%</span></div><div class="progress"><div class="progress-bar" style="width: 78%;"></div></div></div><div style="margin-bottom: var(--spacing-lg);"><div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm);"><span>Website Traffic</span><span class="text-bold">65%</span></div><div class="progress"><div class="progress-bar" style="width: 65%;"></div></div></div><div><div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-sm);"><span>Engagement</span><span class="text-bold">92%</span></div><div class="progress"><div class="progress-bar" style="width: 92%;"></div></div></div></div></div>< !-- Products Grid --><div class="card" style="margin-top: var(--spacing-xxl);"><div class="card-header"><h2>Top Products</h2></div><div class="product-grid"><div class="card"><img src="https://via.placeholder.com/300x200" alt="Product"><div style="padding: var(--spacing-md);"><h3>Premium Face Cream</h3><p class="text-muted" style="font-size: 14px;">Beauty & Skincare</p><div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--spacing-md);"><span class="text-bold">$45.99</span><span class="badge">In Stock</span></div></div></div><div class="card"><img src="https://via.placeholder.com/300x200" alt="Product"><div style="padding: var(--spacing-md);"><h3>Organic Shampoo</h3><p class="text-muted" style="font-size: 14px;">Hair Care</p><div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--spacing-md);"><span class="text-bold">$32.99</span><span class="badge">In Stock</span></div></div></div><div class="card"><img src="https://via.placeholder.com/300x200" alt="Product"><div style="padding: var(--spacing-md);"><h3>Moisturizing Lotion</h3><p class="text-muted" style="font-size: 14px;">Body Care</p><div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--spacing-md);"><span class="text-bold">$28.99</span><span class="badge">Low Stock</span></div></div></div><div class="card"><img src="https://via.placeholder.com/300x200" alt="Product"><div style="padding: var(--spacing-md);"><h3>Lip Balm</h3><p class="text-muted" style="font-size: 14px;">Lip Care</p><div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--spacing-md);"><span class="text-bold">$12.99</span><span class="badge">In Stock</span></div></div></div></div></div></main></div>< !-- Footer --><footer><div class="container"><div class="grid-3"><div><h3>About SG.IO</h3><p class="text-muted">Multi-tenant SaaS platform for launching online businesses in 150+countries.</p></div><div><h3>Quick Links</h3><ul style="list-style: none;"><li><a href="#">Documentation</a></li><li><a href="#">Support</a></li><li><a href="#">Pricing</a></li><li><a href="#">Contact</a></li></ul></div><div><h3>Legal</h3><ul style="list-style: none;"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Cookies</a></li></ul></div></div><div style="text-align: center; margin-top: var(--spacing-xxl); padding-top: var(--spacing-lg); border-top: 1px solid rgba(255,255,255,0.1);"><p class="text-muted">&copy;
+2024 SG.IO. All rights reserved. Built for global entrepreneurs.</p></div></div></footer><script> // Mobile Navigation Toggle
+const navToggle=document.getElementById('navToggle');
+const navMenu=document.getElementById('navMenu');
+const sidebar=document.getElementById('sidebar');
+
+navToggle.addEventListener('click', ()=> {
+        navMenu.classList.toggle('active');
+        sidebar.classList.toggle('show');
+    });
+
+// Close menu when clicking on a nav item
+document.querySelectorAll('.nav-item').forEach(item=> {
+        item.addEventListener('click', ()=> {
+                navMenu.classList.remove('active');
+                sidebar.classList.remove('show');
+            });
+    });
+
+// Sidebar item selection
+document.querySelectorAll('.sidebar-item').forEach(item=> {
+        item.addEventListener('click', function() {
+                document.querySelectorAll('.sidebar-item').forEach(i=> i.classList.remove('active'));
+                this.classList.add('active');
+            });
+    });
+
+console.log('✅ Responsive Dashboard Ready!');
+</script></body></html>

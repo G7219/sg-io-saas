@@ -1,0 +1,515 @@
+<!-- CHURCH & MINISTRIES SOLUTION PAGE
+Location: public/solutions/church.html
+-->
+
+<!DOCTYPE html>
+<html lang="en" data-niche="CHURCH">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-07ZTY6SJKD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-07ZTY6SJKD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tenant-id" content="">
+    <title>Church Management Solutions | SG.IO Global</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Merriweather:wght@400;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/sg-io-enterprise-design-system.css">
+    <link rel="stylesheet" href="/assets/css/feature-gating.css">
+
+    <style>
+        .solution-hero {
+            background: linear-gradient(135deg, #2D3E3F 0%, #8B3A3A 100%);
+            color: #F5F1E8;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .solution-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .solution-hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .niche-color-accent {
+            color: #8B3A3A;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: #FAFAF8;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #8B3A3A;
+        }
+
+        .feature-card h3 {
+            color: #2D3E3F;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tier-comparison {
+            margin: 60px 0;
+        }
+
+        .tier-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tier-card {
+            background: white;
+            border: 2px solid #E5DDD0;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tier-card:hover {
+            border-color: #8B3A3A;
+            box-shadow: 0 4px 12px rgba(139, 58, 58, 0.1);
+        }
+
+        .tier-card.popular {
+            border-color: #8B3A3A;
+            background: linear-gradient(135deg, #FFFEF8 0%, #FAF7F0 100%);
+            transform: scale(1.05);
+        }
+
+        .tier-card h3 {
+            color: #2D3E3F;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tier-price {
+            font-size: 32px;
+            color: #8B3A3A;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .tier-price small {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .tier-features {
+            text-align: left;
+            margin: 25px 0;
+        }
+
+        .tier-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #E5DDD0;
+            list-style: none;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .tier-features li:before {
+            content: "✓ ";
+            color: #6B8E23;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .btn-tier {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-tier.primary {
+            background: #8B3A3A;
+            color: white;
+        }
+
+        .btn-tier.primary:hover {
+            background: #6B2E2E;
+        }
+
+        .btn-tier.secondary {
+            background: #F5F1E8;
+            color: #2D3E3F;
+            border: 2px solid #8B3A3A;
+        }
+
+        .btn-tier.secondary:hover {
+            background: #E5DDD0;
+        }
+
+        .niche-showcase {
+            background: #FAFAF8;
+            padding: 60px 20px;
+            border-radius: 8px;
+            margin: 60px 0;
+        }
+
+        .showcase-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .showcase-item:nth-child(even) {
+            direction: rtl;
+        }
+
+        .showcase-item:nth-child(even)>* {
+            direction: ltr;
+        }
+
+        .showcase-content h3 {
+            font-size: 28px;
+            color: #2D3E3F;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .showcase-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .solution-hero h1 {
+                font-size: 32px;
+            }
+
+            .showcase-item,
+            .showcase-item:nth-child(even) {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .tier-card.popular {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar" style="background: white; border-bottom: 1px solid #E5DDD0;">
+        <div class="container"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <h2 style="margin: 0; color: #2D3E3F;">SG.IO Global</h2>
+            <div style="display: flex; gap: 30px;">
+                <a href="/" style="text-decoration: none; color: #2D3E3F; font-weight: 500;">HOME</a>
+                <a href="/#solutions" style="text-decoration: none; color: #2D3E3F; font-weight: 500;">SOLUTIONS</a>
+                <a href="/pricing" style="text-decoration: none; color: #2D3E3F; font-weight: 500;">PRICING</a>
+                <a href="/signup" class="btn btn--gold" style="padding: 10px 20px;">GET STARTED</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="solution-hero">
+        <div class="container">
+            <h1>Community & Congregation Management Platform</h1>
+            <p>Unite your congregation, streamline operations, and deepen spiritual engagement with tools built for
+                faith communities.</p>
+            <button class="btn btn--gold" style="padding: 15px 40px; font-size: 16px;">Start Free Trial</button>
+        </div>
+    </section>
+
+    <!-- KEY FEATURES FOR CHURCH -->
+    <section class="container" style="padding: 60px 20px;">
+        <h2 style="text-align: center; color: #2D3E3F; margin-bottom: 40px; font-family: 'Playfair Display', serif;">Why
+            Churches Choose SG.IO</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>📖 Member Management</h3>
+                <p>Keep a complete directory of your congregation. Track membership status, contact information, and
+                    spiritual journey milestones.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📅 Event Scheduling</h3>
+                <p>Plan and organize services, Bible studies, outreach events, and ministry programs. Send automated
+                    reminders to attendees.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>💰 Giving & Tithes</h3>
+                <p>Track donations, tithes, and offerings securely. Generate giving reports and recognize generous
+                    members with appreciation.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🙏 Prayer Requests</h3>
+                <p>Collect and manage prayer requests from your community. Share prayer updates and mobilize
+                    intercessory prayer teams.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📢 Announcements</h3>
+                <p>Send timely announcements via email, SMS, and app. Keep your congregation informed about service
+                    times and ministry updates.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📱 Member Portal</h3>
+                <p>Give members a digital home where they can view sermons, register for events, and connect with the
+                    community.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NICHE SHOWCASE -->
+    <section class="niche-showcase">
+        <div class="container">
+            <h2
+                style="color: #2D3E3F; text-align: center; margin-bottom: 50px; font-family: 'Playfair Display', serif;">
+                Who Benefits Most</h2>
+
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <h3>Pastors</h3>
+                    <p>Focus on ministry while the platform handles administration. Get insights into congregation
+                        engagement and giving trends to guide your spiritual leadership.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;">✓ Manage congregation growth metrics</li>
+                        <li style="padding: 8px 0;">✓ Plan ministry events efficiently</li>
+                        <li style="padding: 8px 0;">✓ Track spiritual milestones</li>
+                    </ul>
+                </div>
+                <div style="background: #2D3E3F; height: 300px; border-radius: 8px;"></div>
+            </div>
+
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <h3>Church Administrators</h3>
+                    <p>Streamline all operations from one dashboard. Coordinate volunteers, manage schedules, and
+                        monitor engagement across all ministries.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;">✓ Coordinate volunteers efficiently</li>
+                        <li style="padding: 8px 0;">✓ Manage multiple events</li>
+                        <li style="padding: 8px 0;">✓ Monitor member engagement</li>
+                    </ul>
+                </div>
+                <div style="background: #2D3E3F; height: 300px; border-radius: 8px;"></div>
+            </div>
+
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <h3>Ministry Leaders</h3>
+                    <p>Lead small groups and ministries with better tools. Track attendance, communicate with members,
+                        and measure spiritual growth.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 8px 0;">✓ Lead connected small groups</li>
+                        <li style="padding: 8px 0;">✓ Track member participation</li>
+                        <li style="padding: 8px 0;">✓ Manage ministry initiatives</li>
+                    </ul>
+                </div>
+                <div style="background: #2D3E3F; height: 300px; border-radius: 8px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING FOR CHURCH -->
+    <section class="container" style="padding: 60px 20px;">
+        <h2 style="text-align: center; color: #2D3E3F; margin-bottom: 40px; font-family: 'Playfair Display', serif;">
+            Pricing Plans for Churches</h2>
+
+        <div class="tier-cards">
+            <!-- FREE TIER -->
+            <div class="tier-card">
+                <h3>Free</h3>
+                <div class="tier-price">$0<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">Perfect for small churches</p>
+
+                <ul class="tier-features">
+                    <li>Up to 100 members</li>
+                    <li>Basic member roster</li>
+                    <li>Email support</li>
+                    <li>Single user account</li>
+                    <li>10K AI messages/month</li>
+                    <li>Basic announcements</li>
+                </ul>
+
+                <button class="btn-tier secondary" onclick="selectTier('FREE')">Get Started</button>
+            </div>
+
+            <!-- LITE TIER -->
+            <div class="tier-card popular">
+                <span
+                    style="background: #8B3A3A; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">POPULAR</span>
+                <h3>Lite</h3>
+                <div class="tier-price">$30<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">For growing churches</p>
+
+                <ul class="tier-features">
+                    <li>Unlimited members</li>
+                    <li>Event scheduling</li>
+                    <li>Basic giving tracking</li>
+                    <li>Automated reminders</li>
+                    <li>Email + Chat support</li>
+                    <li>2 admin users</li>
+                    <li>50K AI messages/month</li>
+                    <li>Member portal</li>
+                </ul>
+                <div class="pricing-actions" style="margin-top: 20px;">
+                    <a href="/checkout.html?niche=churchandministries&plan=lite&trial=true"
+                        style="display: block; width: 100%; padding: 14px 0; background-color: #2c2c2c; color: #ffffff; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase;">
+                        Start 4-Day Free Trial
+                    </a>
+                    <p
+                        style="font-size: 11px; color: #888; text-align: center; margin: 8px 0 15px 0; font-family: 'Inter', sans-serif;">
+                        Requires setup. Billed after 4 days.
+                    </p>
+
+                    <a href="/checkout.html?niche=churchandministries&plan=lite"
+                        style="display: block; width: 100%; padding: 12px 0; background-color: transparent; color: #2c2c2c; border: 1px solid #2c2c2c; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase; transition: all 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#f4f4f2'"
+                        onmouseout="this.style.backgroundColor='transparent'">
+                        Pay Now
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- RISE TIER -->
+            <div class="tier-card">
+                <h3>Rise</h3>
+                <div class="tier-price">$75<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">For established churches</p>
+
+                <ul class="tier-features">
+                    <li>Everything in Lite, plus:</li>
+                    <li>Advanced giving analytics</li>
+                    <li>Member giving insights</li>
+                    <li>Prayer request management</li>
+                    <li>5 admin users</li>
+                    <li>Automated giving reports</li>
+                    <li>500K AI messages/month</li>
+                    <li>Advanced analytics</li>
+                </ul>
+                <div class="pricing-actions" style="margin-top: 20px;">
+                    <a href="/checkout.html?niche=churchandministries&plan=rise&trial=true"
+                        style="display: block; width: 100%; padding: 14px 0; background-color: #2c2c2c; color: #ffffff; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase;">
+                        Start 4-Day Free Trial
+                    </a>
+                    <p
+                        style="font-size: 11px; color: #888; text-align: center; margin: 8px 0 15px 0; font-family: 'Inter', sans-serif;">
+                        Requires setup. Billed after 4 days.
+                    </p>
+
+                    <a href="/checkout.html?niche=churchandministries&plan=rise"
+                        style="display: block; width: 100%; padding: 12px 0; background-color: transparent; color: #2c2c2c; border: 1px solid #2c2c2c; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase; transition: all 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#f4f4f2'"
+                        onmouseout="this.style.backgroundColor='transparent'">
+                        Pay Now
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- ELITE TIER -->
+            <div class="tier-card">
+                <h3>Elite</h3>
+                <div class="tier-price">$100<small>/month</small></div>
+                <p style="color: #999; font-size: 13px;">For large organizations</p>
+
+                <ul class="tier-features">
+                    <li>Everything in Rise, plus:</li>
+                    <li>Unlimited admin users</li>
+                    <li>Sermon library & streaming</li>
+                    <li>Advanced security</li>
+                    <li>White-label solution</li>
+                    <li>API access for integrations</li>
+                    <li>24/7 phone support</li>
+                    <li>Unlimited AI messages</li>
+                </ul>
+                <div class="pricing-actions" style="margin-top: 20px;">
+                    <a href="/checkout.html?niche=churchandministries&plan=elite&trial=true"
+                        style="display: block; width: 100%; padding: 14px 0; background-color: #2c2c2c; color: #ffffff; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase;">
+                        Start 4-Day Free Trial
+                    </a>
+                    <p
+                        style="font-size: 11px; color: #888; text-align: center; margin: 8px 0 15px 0; font-family: 'Inter', sans-serif;">
+                        Requires setup. Billed after 4 days.
+                    </p>
+
+                    <a href="/checkout.html?niche=churchand ministries&plan=elite"
+                        style="display: block; width: 100%; padding: 12px 0; background-color: transparent; color: #2c2c2c; border: 1px solid #2c2c2c; text-align: center; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase; transition: all 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#f4f4f2'"
+                        onmouseout="this.style.backgroundColor='transparent'">
+                        Pay Now
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section
+        style="background: linear-gradient(135deg, #2D3E3F 0%, #8B3A3A 100%); color: #F5F1E8; padding: 60px 20px; text-align: center;">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 20px;">Ready to Transform
+                Your Church Community?</h2>
+            <p style="font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Unite your congregation, streamline operations, and deepen spiritual engagement with SG.IO.</p>
+            <button class="btn btn--gold" style="padding: 15px 40px; font-size: 16px;" onclick="startTrial()">Start Free
+                Trial - No Credit Card Required</button>
+        </div>
+    </section>
+
+    <script src="/assets/js/feature-gating-client.js"></script>
+    <script>
+        function selectTier(tier) {
+            window.location.href = `/signup?plan=${tier}&niche=CHURCH`;
+        }
+
+        function startTrial() {
+            window.location.href = '/signup?niche=CHURCH';
+        }
+    </script>
+</body>
+
+</html>

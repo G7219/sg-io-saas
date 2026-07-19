@@ -1,0 +1,50 @@
+{
+    "name": "sg-io",
+    "version": "1.0.0",
+    "description": "SG.IO - Multi-tenant, Multi-niche SaaS Platform",
+    "author": "SG.IO Team",
+    "license": "MIT",
+    "main": "dist/app.js",
+    "type": "module",
+    "scripts": {
+        "dev": "tsx watch src/server.ts",
+        "build": "tsc",
+        "start": "node dist/app.js",
+        "prisma:generate": "prisma generate",
+        "prisma:migrate": "prisma migrate dev",
+        "prisma:seed": "prisma db seed",
+        "prisma:studio": "prisma studio",
+        "lint": "eslint src --ext .ts",
+        "test": "vitest",
+        "docker:build": "docker build -t sg-io:latest .",
+        "docker:push": "docker push your-registry/sg-io:latest"
+    },
+    "dependencies": {
+        "@anthropic-ai/sdk": "^0.106.0",
+        "@google/generative-ai": "^0.3.0",
+        "@prisma/client": "^5.7.1",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "helmet": "^7.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "multer": "^2.2.0",
+        "pino": "^8.17.2",
+        "pino-http": "^8.5.0",
+        "prisma": "^5.7.1",
+        "stripe": "^14.8.0",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^2.4.6",
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.6",
+        "@types/jsonwebtoken": "^9.0.10",
+        "@types/multer": "^2.2.0",
+        "@types/node": "^26.1.1",
+        "@types/sharp": "^0.31.1",
+        "tsx": "^4.22.4",
+        "typescript": "^6.0.3"
+    }
+}

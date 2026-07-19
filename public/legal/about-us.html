@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SG.IO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --forest-green: #2D3E3F;
+            --navy: #1A2F3F;
+            --gold: #D4AF37;
+            --cream: #F5F1E8;
+            --burgundy: #8B3A3A;
+        }
+
+        body {
+            font-family: 'Lora', 'Merriweather', serif;
+            background-color: var(--cream);
+            color: var(--forest-green);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 40px;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: var(--navy);
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .ornament {
+            display: inline-block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 15px 0;
+        }
+
+        .tagline {
+            color: var(--burgundy);
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .content {
+            background-color: white;
+            padding: 40px;
+            border: 1px solid #E8E4DC;
+        }
+
+        h2 {
+            color: var(--navy);
+            font-size: 1.8em;
+            margin: 40px 0 20px 0;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 15px;
+            font-weight: 400;
+        }
+
+        h3 {
+            color: var(--forest-green);
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+            font-weight: 400;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .value-item {
+            padding: 25px;
+            border: 1px solid #E8E4DC;
+            border-left: 4px solid var(--gold);
+            background-color: rgba(212, 175, 55, 0.03);
+        }
+
+        .value-item h4 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #E8E4DC;
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: var(--navy);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--burgundy);
+            font-size: 0.95em;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background-color: rgba(212, 175, 55, 0.1);
+            padding: 20px;
+            border-left: 4px solid var(--gold);
+            margin: 25px 0;
+        }
+
+        .contact-box {
+            background-color: var(--navy);
+            color: var(--cream);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+
+        .contact-box h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            margin-bottom: 12px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--gold);
+            font-size: 0.9em;
+        }
+
+        a {
+            color: var(--burgundy);
+            text-decoration: none;
+            border-bottom: 1px dotted;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>ABOUT SG.IO</h1>
+            <div class="ornament"></div>
+            <p class="tagline">"Professional Tools for Global Entrepreneurs"</p>
+        </header>
+
+        <div class="content">
+            <h2>Our Story</h2>
+            <p>SG.IO started with a simple mission: <strong>bring enterprise-grade business tools to entrepreneurs
+                    worldwide, regardless of location, income, or technical expertise.</strong> Founded in 2024, we've
+                grown to serve thousands of businesses across 150+ countries.</p>
+
+            <p>We believe that every business deserves access to the same technology as Fortune 500 companies - without
+                the Fortune 500 price tag. Whether you're in New York, Lagos, Singapore, São Paulo, or anywhere in
+                between, you deserve tools that work for you.</p>
+
+            <h2>Our Mission</h2>
+            <p>To provide affordable, accessible, and reliable SaaS tools that enable small and medium-sized businesses
+                worldwide to operate professionally, scale efficiently, and compete globally—regardless of location,
+                industry, or size.</p>
+
+            <h2>Our Vision</h2>
+            <p>A future where entrepreneurs everywhere have the same technology access as large enterprises, without
+                expensive licensing, complex setups, unnecessary features, or geographic limitations. From Asia to
+                Africa, Americas to Europe, one platform for all.</p>
+
+            <h2>Core Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <h4>🌍 Globally Accessible</h4>
+                    <p>Built for businesses worldwide—support for 50+ currencies, 150+ countries, and compliance with
+                        regulations in every major market.</p>
+                </div>
+                <div class="value-item">
+                    <h4>💰 Affordably Priced</h4>
+                    <p>No hidden fees. Transparent pricing. Free tier for testing. Plans for every budget, from startups
+                        to enterprises.</p>
+                </div>
+                <div class="value-item">
+                    <h4>🔒 Secure & Compliant</h4>
+                    <p>GDPR, CCPA, POPIA compliant. AES-256 encryption. Regular security audits. Your data is protected
+                        like ours.</p>
+                </div>
+                <div class="value-item">
+                    <h4>📱 Easy to Use</h4>
+                    <p>Designed for business owners, not tech experts. Intuitive interface. Setup takes minutes, not
+                        months.</p>
+                </div>
+                <div class="value-item">
+                    <h4>⚡ Powerful Features</h4>
+                    <p>Multi-branch management, payment processing, shipping, AI-powered insights, reviews, B2B
+                        features, and more.</p>
+                </div>
+                <div class="value-item">
+                    <h4>🤝 Customer First</h4>
+                    <p>24/7 support (Elite). 14-day money-back guarantee. Your success is our success. We listen and
+                        improve.</p>
+                </div>
+            </div>
+
+            <h2>By the Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Currencies Supported</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Industry-Specific Templates</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime Guarantee</div>
+                </div>
+            </div>
+
+            <h2>What We Offer</h2>
+            <h3>E-Commerce & Catalog</h3>
+            <ul>
+                <li>Unlimited products (Lite+)</li>
+                <li>Multiple categories</li>
+                <li>Product variants & pricing tiers</li>
+                <li>Digital & physical products</li>
+                <li>Bulk upload tools</li>
+            </ul>
+
+            <h3>Multi-Location Management</h3>
+            <ul>
+                <li>Manage multiple branches from one dashboard</li>
+                <li>Separate inventory per location</li>
+                <li>Location-specific pricing</li>
+                <li>Social media handles per location</li>
+                <li>Aggregated analytics</li>
+            </ul>
+
+            <h3>Payments & Billing</h3>
+            <ul>
+                <li>Stripe, PayPal, Square, Flutterwave, M-Pesa</li>
+                <li>50+ currencies, real-time conversion</li>
+                <li>Subscription management</li>
+                <li>Invoice generation</li>
+                <li>Payment tracking & reports</li>
+            </ul>
+
+            <h3>Shipping & Logistics</h3>
+            <ul>
+                <li>50+ courier integrations</li>
+                <li>Real-time tracking</li>
+                <li>Automated label printing</li>
+                <li>Rate calculations</li>
+                <li>International shipping support</li>
+            </ul>
+
+            <h3>AI-Powered Features</h3>
+            <ul>
+                <li>Gemini Pro Extended (1M token context)</li>
+                <li>Claude (best quality AI)</li>
+                <li>Groq (ultra-fast AI)</li>
+                <li>Intelligent provider switching</li>
+                <li>Product descriptions, customer insights, demand forecasting</li>
+            </ul>
+
+            <h3>Customer Management</h3>
+            <ul>
+                <li>Customer database</li>
+                <li>Purchase history</li>
+                <li>Reviews & ratings</li>
+                <li>Email campaigns</li>
+                <li>Loyalty programs</li>
+            </ul>
+
+            <h3>B2B Features</h3>
+            <ul>
+                <li>Wholesale pricing</li>
+                <li>Volume discounts</li>
+                <li>Invoice terms (Net-30/60/90)</li>
+                <li>Admin negotiation portal</li>
+                <li>Bulk ordering</li>
+            </ul>
+
+            <h3>Analytics & Reports</h3>
+            <ul>
+                <li>Real-time dashboards</li>
+                <li>Revenue analytics</li>
+                <li>Customer lifetime value</li>
+                <li>Product performance</li>
+                <li>Custom reports</li>
+            </ul>
+
+            <h2>Niche Expertise</h2>
+            <p>SG.IO is built for 10 specific industries:</p>
+            <ul>
+                <li>Pharmacies & Clinics</li>
+                <li>Restaurants & Food Service</li>
+                <li>Real Estate & Property</li>
+                <li>Electronics & Retail</li>
+                <li>B2B & Wholesale</li>
+                <li>Software & SaaS</li>
+                <li>Salons & Personal Services</li>
+                <li>General Retail</li>
+                <li>Churches & Non-Profits</li>
+                <li>E-Learning & Courses</li>
+            </ul>
+
+            <p>Each industry has compliant terms, templates, and guidance built-in.</p>
+
+            <h2>Compliance & Security</h2>
+            <div class="highlight">
+                <strong>We comply with:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>GDPR (EU)</li>
+                    <li>CCPA (California)</li>
+                    <li>POPIA (South Africa/Africa)</li>
+                    <li>PIPEDA (Canada)</li>
+                    <li>PDPA (Singapore)</li>
+                    <li>APPI (Japan)</li>
+                    <li>LGPD (Brazil)</li>
+                    <li>Local regulations in 150+ countries</li>
+                </ul>
+            </div>
+
+            <h2>Our Team</h2>
+            <p>SG.IO is built by a global team of engineers, product designers, and entrepreneurs who understand what it
+                takes to run a business. We're passionate about making SaaS accessible to everyone, everywhere.</p>
+
+            <p>We work with payment processors, shipping partners, AI providers, and cloud infrastructure companies to
+                bring you the best tools available.</p>
+
+            <h2>Looking Forward</h2>
+            <p>We're continuously improving. Our roadmap includes:</p>
+            <ul>
+                <li>Additional payment methods</li>
+                <li>More shipping integrations</li>
+                <li>Advanced AI features</li>
+                <li>Marketplace for apps & integrations</li>
+                <li>White-label solutions</li>
+                <li>API expansion</li>
+                <li>Industry-specific features</li>
+            </ul>
+
+            <div class="contact-box">
+                <h3>Get In Touch</h3>
+                <div class="contact-item"><strong>General Inquiries:</strong> hello@sg.io</div>
+                <div class="contact-item"><strong>Support:</strong> support@sg.io</div>
+                <div class="contact-item"><strong>Sales:</strong> sales@sg.io</div>
+                <div class="contact-item"><strong>Legal:</strong> legal@sg.io</div>
+                <div class="contact-item"><strong>Response Time:</strong> 24 hours or less</div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px;">
+                <strong>SG.IO: Professional tools for professionals everywhere. Join thousands of successful businesses
+                    worldwide.</strong>
+            </p>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 SG.IO Global. All rights reserved.</p>
+            <p>
+                <a href="terms.html">Terms & Conditions</a> |
+                <a href="privacy.html">Privacy Policy</a> |
+                <a href="returns-refund.html">Returns & Refund</a>
+            </p>
+        </footer>
+    </div>
+</body>
+
+</html>
