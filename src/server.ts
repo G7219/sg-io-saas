@@ -12,7 +12,7 @@ import path from 'path';
 // Load environment variables
 config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
 const prisma = new PrismaClient();
 
 // =========================
@@ -26,7 +26,7 @@ async function startServer() {
         console.log('✅ Database connected successfully');
 
         // Start server
-        const server = app.listen(PORT, () => {
+        const server = app.listen(PORT, '0.0.0.0', () => {
             console.log(`
 ╔═══════════════════════════════════════╗
 ║         🌐 SG.IO GLOBAL 🌐            ║
