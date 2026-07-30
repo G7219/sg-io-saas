@@ -8,7 +8,7 @@
     "type": "module",
     "scripts": {
         "dev": "tsx watch src/server.ts",
-        "build": "prisma generate && tsc",
+        "build": "npx prisma generate && npx tsc",
         "start": "node dist/app.js",
         "prisma:generate": "prisma generate",
         "prisma:migrate": "prisma migrate dev",
