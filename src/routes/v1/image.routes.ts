@@ -5,7 +5,7 @@
 
 import { Router, Request, Response } from 'express';
 import multer from 'multer';
-import ImageService from '../../services/image.service';
+import ImageService from '../../services/image.service.js';
 
 const router = Router();
 

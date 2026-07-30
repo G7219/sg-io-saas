@@ -5,50 +5,31 @@
 
 import { Request } from 'express';
 
-declare global {
-    namespace Express {
-        interface Request {
-            user?: {
-                id: string;
-                email: string;
-                tenantId: string;
-                role: 'user' | 'admin' | 'superadmin';
-                iat?: number;
-                exp?: number;
-            };
-            tenant?: {
-                id: string;
-                business_name: string;
-                email: string;
-                subdomain: string;
-                is_active: boolean;
-            };
-            admin?: {
-                id: string;
-                email: string;
-                role: 'superadmin' | 'admin' | 'support' | 'accountant' | 'security';
-                is_active: boolean;
-            };
-            niche?: {
-                id: string;
-                name: string;
-                template: string;
-                category: string;
-            };
-        }
-    }
-}
-
-export interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Omit<Request, 'tenant' | 'user'> {
     user: {
         id: string;
         email: string;
         tenantId: string;
         role: 'user' | 'admin' | 'superadmin';
+        iat?: number;
+        exp?: number;
+    };
+    tenant?: {
+        id: string;
+        business_name: string;
+        email: string;
+        subdomain: string;
+        is_active: boolean;
+    };
+    admin?: {
+        id: string;
+        email: string;
+        role: 'superadmin' | 'admin' | 'support' | 'accountant';
+        is_active: boolean;
     };
 }
 
-export interface TenantRequest extends Request {
+export interface TenantRequest extends Omit<Request, 'tenant' | 'user'> {
     user: {
         id: string;
         email: string;
@@ -68,10 +49,11 @@ export interface AdminRequest extends Request {
     admin: {
         id: string;
         email: string;
-        role: 'superadmin' | 'admin' | 'support' | 'accountant' | 'security';
+        role: 'superadmin' | 'admin' | 'support' | 'accountant';
         is_active: boolean;
     };
 }
+
 
 export interface NicheRequest extends Request {
     niche: {

@@ -2,7 +2,7 @@ import { Router, Request, Response, raw } from 'express';
 import crypto from 'crypto';
 import { PrismaClient } from '@prisma/client';
 import Stripe from 'stripe';
-import config from '../../config/env';
+import config from '../../config/env.js';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -43,7 +43,7 @@ router.post(
                         renewalDate.setMonth(renewalDate.getMonth() + 1);
 
                         await prisma.tenant.update({
-                            where: { id: tenantId },
+                            where: { id: tenantId as any },
                             data: {
                                 tier: planType,
                                 status: 'active',
@@ -52,7 +52,7 @@ router.post(
                         });
 
                         await prisma.paymentLog.updateMany({
-                            where: { payment_reference: paymentIntent.id },
+                            where: { provider_transaction_id: paymentIntent.id },
                             data: { status: 'completed' }
                         });
 
@@ -63,7 +63,7 @@ router.post(
                 case 'payment_intent.payment_failed':
                     const failedIntent = event.data.object as Stripe.PaymentIntent;
                     await prisma.paymentLog.updateMany({
-                        where: { payment_reference: failedIntent.id },
+                        where: { provider_transaction_id: failedIntent.id },
                         data: { status: 'failed' }
                     });
                     console.log(`❌ Stripe payment failed: ${failedIntent.id}`);
@@ -104,7 +104,7 @@ router.post('/flutterwave', async (req: Request, res: Response) => {
 
         if (event === 'charge.completed' && data.status === 'successful') {
             const paymentLog = await prisma.paymentLog.findFirst({
-                where: { payment_reference: data.tx_ref }
+                where: { provider_transaction_id: data.tx_ref }
             });
 
             if (paymentLog) {
@@ -116,7 +116,7 @@ router.post('/flutterwave', async (req: Request, res: Response) => {
                 await prisma.tenant.update({
                     where: { id: paymentLog.tenant_id },
                     data: {
-                        tier: paymentLog.plan_type,
+                        tier: paymentLog.plan_type ?? 'standard',
                         status: 'active',
                         subscription_expires_at: new Date(
                             Date.now() + 30 * 24 * 60 * 60 * 1000
@@ -149,7 +149,7 @@ router.post('/mpesa', async (req: Request, res: Response) => {
 
             if (reference) {
                 const paymentLog = await prisma.paymentLog.findFirst({
-                    where: { payment_reference: String(reference) }
+                    where: { provider_transaction_id: String(reference) }
                 });
 
                 if (paymentLog) {
@@ -161,7 +161,7 @@ router.post('/mpesa', async (req: Request, res: Response) => {
                     await prisma.tenant.update({
                         where: { id: paymentLog.tenant_id },
                         data: {
-                            tier: paymentLog.plan_type,
+                            tier: paymentLog.plan_type ?? 'standard',
                             status: 'active',
                             subscription_expires_at: new Date(
                                 Date.now() + 30 * 24 * 60 * 60 * 1000

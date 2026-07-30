@@ -17,13 +17,13 @@ import path from 'path';
 config();
 
 // Import middleware
-import { errorHandler } from './middleware/errorHandler';
-import { securityHeaders } from './middleware/security';
+import { errorHandler } from './middleware/errorHandler.js';
+import { securityHeaders } from './middleware/security.js';
 //import { requestLogger } from './middleware/logging';
-import { authMiddleware } from './middleware/auth';
+import { authMiddleware } from './middleware/auth.js';
 
 // Import routes
-import authRoutes from './routes/v1/auth.routes';
+import authRoutes from './routes/v1/auth.routes.js';
 // import productsRoutes from './routes/v1/products.routes';
 // import ordersRoutes from './routes/v1/orders.routes';
 // import customersRoutes from './routes/v1/customers.routes';
@@ -31,16 +31,16 @@ import authRoutes from './routes/v1/auth.routes';
 // import shippingRoutes from './routes/v1/shipping.routes';
 // import locationsRoutes from './routes/v1/locations.routes';
 // import inventoryRoutes from './routes/v1/inventory.routes';
-// import analyticsRoutes from './routes/v1/analytics.routes';
+// import analyticsRoutes from './routes/v1/analytics..routes';
 // import reviewsRoutes from './routes/v1/reviews.routes';
 // import ratingsRoutes from './routes/v1/ratings.routes';
 // import aiRoutes from './routes/v1/ai.routes';
 // import b2bRoutes from './routes/v1/b2b.routes';
-import setupRoutes from './routes/v1/setup.routes';
-import dashboardRoutes from './routes/v1/dashboard.routes';
-import adminRoutes from './routes/v1/admin';
+import setupRoutes from './routes/v1/setup.routes.js';
+import dashboardRoutes from './routes/v1/dashboard.routes.js';
+import adminRoutes from './routes/v1/admin.js';
 import { success } from 'zod/v4';
-import router from './routes/locations';
+import router from './routes/locations.js';
 
 const app: Express = express();
 

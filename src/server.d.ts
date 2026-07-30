@@ -1,0 +1,8 @@
+/**
+ * SG.IO Server Startup
+ * Database connection and server initialization
+ */
+import { PrismaClient } from '@prisma/client';
+declare const prisma: PrismaClient<import(".prisma/client").Prisma.PrismaClientOptions, never, import("@prisma/client/runtime/library").DefaultArgs>;
+export { prisma };
+//# sourceMappingURL=server.d.ts.map

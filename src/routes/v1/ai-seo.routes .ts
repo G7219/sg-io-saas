@@ -4,7 +4,8 @@
  */
 
 import { Router, Request, Response } from 'express';
-import AISEOService from '../../services/ai-seo.service';
+// Kama mstari huu utaleta error, soma maelezo chini ya hii code
+import AISEOService from '../../services/ai-seo.service.js';
 
 const router = Router();
 

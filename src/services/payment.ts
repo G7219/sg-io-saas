@@ -91,9 +91,8 @@ export class PaymentService {
                     tenant_id: tenantId,
                     amount,
                     status: 'success',
-                    payment_method: 'stripe',
-                    stripe_payment_id: paymentIntentId,
-                    description: `Payment for ${plan} plan`
+                    payment_method_id: null,
+                    provider_transaction_id: paymentIntentId,
                 }
             });
 
@@ -101,24 +100,24 @@ export class PaymentService {
             const nextPaymentDate = new Date();
             nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
 
-            const paymentStatus = await prisma.tenantPaymentStatus.upsert({
-                where: { tenant_id: tenantId },
-                update: {
-                    current_plan: plan,
-                    subscription_status: 'active',
-                    next_payment_date: nextPaymentDate,
-                    is_overdue: false,
-                    last_payment_date: new Date()
-                },
-                create: {
-                    tenant_id: tenantId,
-                    current_plan: plan,
-                    subscription_status: 'active',
-                    next_payment_date: nextPaymentDate,
-                    is_overdue: false,
-                    last_payment_date: new Date()
+            const paymentStatus = await prisma.tenant.update({
+                where: { id: tenantId },
+                data: {
+                    tier: plan,
+                    status: 'active',
+
                 }
             });
+
+            await prisma.paymentLog.create({
+                data: {
+                    tenant_id: tenantId,
+                    amount: 0, // Badilisha uweke kiasi halisi cha malipo
+                    status: 'success',
+                    plan_type: plan,
+                }
+            });
+
 
             return {
                 success: true,
@@ -169,17 +168,20 @@ export class PaymentService {
      */
     async addPaymentMethod(
         tenantId: string,
-        type: string,
-        token: string,
-        lastFour: string
+        methodType: string,
+        providerId: string,
+        apiKey: string,
+        merchantId: string
     ) {
         try {
             const method = await prisma.paymentMethod.create({
                 data: {
                     tenant_id: tenantId,
-                    type,
-                    token,
-                    last_four: lastFour,
+                    method_type: methodType,
+                    provider_id: providerId,
+                    api_key: apiKey,
+                    merchant_id: merchantId,
+                    is_primary: true,
                     is_default: true
                 }
             });
@@ -328,7 +330,7 @@ export class PaymentService {
             // Update overdue status
             for (const payment of overdue) {
                 const daysOverdue = Math.floor(
-                    (now.getTime() - payment.next_payment_date.getTime()) / (1000 * 60 * 60 * 24)
+                    (now.getTime() - payment.next_payment_date!.getTime()) / (1000 * 60 * 60 * 24)
                 );
 
                 await prisma.tenantPaymentStatus.update({
@@ -373,9 +375,9 @@ export class PaymentService {
             }
 
             // Refund from Stripe
-            if (payment.stripe_payment_id) {
+            if (payment.provider_transaction_id) {
                 const refund = await stripe.refunds.create({
-                    payment_intent: payment.stripe_payment_id,
+                    payment_intent: payment.provider_transaction_id,
                     reason: reason as any
                 });
 
@@ -436,12 +438,11 @@ export class PaymentService {
                 success: true,
                 data: {
                     invoice_id: payment.id,
-                    business_name: payment.tenant.business_name,
-                    email: payment.tenant.email,
+                    business_name: payment.tenant?.business_name,
+                    email: payment.tenant?.email,
                     amount: payment.amount,
                     date: payment.created_at,
                     status: payment.status,
-                    description: payment.description
                 }
             };
         } catch (error: any) {

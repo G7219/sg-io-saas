@@ -3,7 +3,7 @@
  * Database connection and server initialization
  */
 
-import app from './app';
+import app from './app.js';
 import { PrismaClient } from '@prisma/client';
 import { config } from 'dotenv';
 import path from 'path';

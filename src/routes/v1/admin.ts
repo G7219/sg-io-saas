@@ -41,7 +41,7 @@ router.get('/:tenantId/logs', async (req: Request, res: Response) => {
         const { tenantId } = req.params;
 
         const logs = await prisma.websiteControlLog.findMany({
-            where: { tenant_id: tenantId },
+            where: { tenant_id: tenantId as string }, // <-- Tumeongeza 'as string' hapa
             orderBy: { created_at: 'desc' },
             take: 100
         });
@@ -51,6 +51,7 @@ router.get('/:tenantId/logs', async (req: Request, res: Response) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
+
 
 // POST /api/v1/admin/website-control/:tenantId/logs/revert
 // Revert to previous state

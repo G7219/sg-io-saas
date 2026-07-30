@@ -5,15 +5,18 @@
 
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient({
-    log: process.env.NODE_ENV === 'development'
-        ? ['query', 'error', 'warn']
-        : ['error'],
-});
-
 /**
  * Handle Prisma client connection events
  */
+const prisma = new PrismaClient({
+    log: [
+        { emit: 'event', level: 'query' },
+        { emit: 'event', level: 'error' },
+        { emit: 'event', level: 'info' },
+        { emit: 'event', level: 'warn' },
+    ],
+});
+
 prisma.$on('error', (e: any) => {
     console.error('❌ Prisma Error:', e);
 });

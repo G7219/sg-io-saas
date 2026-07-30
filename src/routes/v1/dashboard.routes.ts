@@ -1,8 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { authMiddleware, checkSubscriptionStatus } from '../../middleware/auth';
-import { asyncHandler } from '../../middleware/errorHandler';
-import * as Errors from '../../utils/Errors';
+import { authMiddleware, checkSubscriptionStatus } from '../../middleware/auth.js';
+import { asyncHandler } from '../../middleware/errorHandler.js';
+import * as Errors from '../../utils/Errors.js';
+import { number } from 'zod/v4';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -93,8 +94,8 @@ router.get(
                     totalRevenue: totalRevenue._sum.amount || 0,
                     monthlyRevenue: monthlyRevenue._sum.amount || 0,
                     ordersThisMonth,
-                    totalOrders: tenant._count?.orders || 0,
-                    totalProducts: tenant._count?.products || 0
+                    totalOrders: (tenant as any)._count?.orders || 0,
+                    totalProducts: (tenant as any)._count?.products || 0
                 },
                 recentOrders: recentOrders.map((o: any) => ({
                     id: o.id,
@@ -200,7 +201,7 @@ router.put(
         const { name, price, description, category, imageUrl, isActive } = req.body;
 
         const product = await prisma.product.findUnique({
-            where: { id: productId }
+            where: { id: productId as any }
         });
 
         if (!product || product.tenant_id !== tenantId) {
@@ -208,7 +209,7 @@ router.put(
         }
 
         const updated = await prisma.product.update({
-            where: { id: productId },
+            where: { id: productId as any },
             data: {
                 ...(name && { name }),
                 ...(price && { price: Number(price) }),
@@ -238,7 +239,7 @@ router.delete(
         const productId = Number(req.params.id);
 
         const product = await prisma.product.findUnique({
-            where: { id: productId }
+            where: { id: productId as any }
         });
 
         if (!product || product.tenant_id !== tenantId) {
@@ -246,7 +247,7 @@ router.delete(
         }
 
         await prisma.product.update({
-            where: { id: productId },
+            where: { id: productId as any },
             data: { is_active: false }
         });
 

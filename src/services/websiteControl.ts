@@ -5,6 +5,7 @@
 
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { string } from 'zod/v4';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -16,7 +17,7 @@ const prisma = new PrismaClient();
 router.get('/:storeId/status', async (req: Request, res: Response) => {
     try {
         const status = await prisma.websiteStatus.findUnique({
-            where: { tenant_id: req.params.storeId }
+            where: { tenant_id: req.params.storeId as string }
         });
 
         if (!status) {
@@ -47,7 +48,7 @@ router.post('/:storeId/enable', async (req: Request, res: Response) => {
         const { reason } = req.body;
 
         const updated = await prisma.websiteStatus.update({
-            where: { tenant_id: req.params.storeId },
+            where: { tenant_id: req.params.storeId as string },
             data: {
                 is_online: true,
                 manual_status: 'enabled'
@@ -57,7 +58,7 @@ router.post('/:storeId/enable', async (req: Request, res: Response) => {
         // Log control action
         await prisma.websiteControlLog.create({
             data: {
-                tenant_id: req.params.storeId,
+                tenant_id: req.params.storeId as string,
                 action: 'ENABLE',
                 reason: reason || 'Manual enable by admin',
                 performed_by: (req as any).user.id
@@ -70,7 +71,7 @@ router.post('/:storeId/enable', async (req: Request, res: Response) => {
                 admin_id: (req as any).user.id,
                 action: 'ENABLE_WEBSITE',
                 description: `Enabled website for store ${req.params.storeId}. Reason: ${reason}`,
-                tenant_id: req.params.storeId
+                tenant_id: req.params.storeId as string
             }
         });
 
@@ -96,7 +97,7 @@ router.post('/:storeId/disable', async (req: Request, res: Response) => {
         const { reason } = req.body;
 
         const updated = await prisma.websiteStatus.update({
-            where: { tenant_id: req.params.storeId },
+            where: { tenant_id: req.params.storeId as string },
             data: {
                 is_online: false,
                 manual_status: 'disabled'
@@ -106,7 +107,7 @@ router.post('/:storeId/disable', async (req: Request, res: Response) => {
         // Log control action
         await prisma.websiteControlLog.create({
             data: {
-                tenant_id: req.params.storeId,
+                tenant_id: req.params.storeId as string,
                 action: 'DISABLE',
                 reason: reason || 'Manual disable by admin',
                 performed_by: (req as any).user.id
@@ -119,7 +120,7 @@ router.post('/:storeId/disable', async (req: Request, res: Response) => {
                 admin_id: (req as any).user.id,
                 action: 'DISABLE_WEBSITE',
                 description: `Disabled website for store ${req.params.storeId}. Reason: ${reason}`,
-                tenant_id: req.params.storeId
+                tenant_id: req.params.storeId as string
             }
         });
 
@@ -145,7 +146,7 @@ router.post('/:storeId/maintenance', async (req: Request, res: Response) => {
         const { message } = req.body;
 
         const updated = await prisma.websiteStatus.update({
-            where: { tenant_id: req.params.storeId },
+            where: { tenant_id: req.params.storeId as string },
             data: {
                 is_online: false,
                 manual_status: 'maintenance',
@@ -173,14 +174,10 @@ router.post('/:storeId/maintenance', async (req: Request, res: Response) => {
 router.get('/:storeId/logs', async (req: Request, res: Response) => {
     try {
         const logs = await prisma.websiteControlLog.findMany({
-            where: { tenant_id: req.params.storeId },
+            where: { tenant_id: req.params.storeId as string },
             orderBy: { created_at: 'desc' },
             take: 50,
-            include: {
-                admin: {
-                    select: { email: true, name: true }
-                }
-            }
+
         });
 
         res.json({
@@ -218,7 +215,7 @@ router.post('/:storeId/logs/revert', async (req: Request, res: Response) => {
         // Get previous log to determine state to revert to
         const previousLog = await prisma.websiteControlLog.findFirst({
             where: {
-                tenant_id: req.params.storeId,
+                tenant_id: req.params.storeId as string,
                 created_at: { lt: log.created_at }
             },
             orderBy: { created_at: 'desc' }
@@ -233,7 +230,7 @@ router.post('/:storeId/logs/revert', async (req: Request, res: Response) => {
         }
 
         const updated = await prisma.websiteStatus.update({
-            where: { tenant_id: req.params.storeId },
+            where: { tenant_id: req.params.storeId as string },
             data: {
                 is_online: newStatus,
                 manual_status: newManualStatus

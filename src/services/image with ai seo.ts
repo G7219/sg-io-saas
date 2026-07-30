@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client';
 import * as fs from 'fs';
 import * as path from 'path';
 import sharp from 'sharp';
-import AISEOService from './ai-seo.service';
+import AISEOService from './ai-seo.service.js';
 import express from 'express';
 import multer from 'multer';
 
