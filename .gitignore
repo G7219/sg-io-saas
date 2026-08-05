@@ -1,5 +1,5 @@
 .env.local
 .env.production
-.env.example
+.env
 node_modules
 dist
