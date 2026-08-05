@@ -1,0 +1,10 @@
+{
+    "build": {
+        "builder": "nixpacks",
+        "buildCommand": "npm ci && npm run build"
+    },
+    "deploy": {
+        "restartPolicyMaxRetries": 5,
+        "restartPolicyWindowMs": 60000
+    }
+}
