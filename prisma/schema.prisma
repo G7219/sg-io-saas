@@ -7,7 +7,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -19,7 +19,7 @@ model SubscriptionPlan {
   id          String  @id @default(cuid())
   name        String  @unique // FREE, LITE, RISE, ELITE
   displayName String
-  description String? @db.LongText
+  description String? 
 
   // Pricing
   price_usd Float @default(0)
@@ -47,7 +47,7 @@ model Feature {
   id          String  @id @default(cuid())
   key         String  @unique // e.g., "maps_integration"
   name        String
-  description String? @db.LongText
+  description String? 
   minTier     String // FREE, LITE, RISE, ELITE
   category    String // branding, maps, sync, analytics, etc
 
@@ -76,21 +76,21 @@ model PlanFeature {
 
 model Tenant {
   id                      String    @id @default(cuid())
-  business_name           String    @db.VarChar(255)
-  subdomain               String    @unique @db.VarChar(100)
-  owner_email             String    @unique @db.VarChar(255)
+  business_name           String    
+  subdomain               String    @unique 
+  owner_email             String    @unique 
   tier                    String    @default("lite") // lite, rise, elite
   status                  String    @default("trial") // trial, active, suspended, expired
   is_launched             Boolean   @default(false)
   subscription_expires_at DateTime?
-  selected_niche          String?   @db.VarChar(50) // pharmacy, church, salon, real-estate, b2b, boutique, restaurant
+  selected_niche          String?   
   primary_color           String?   @default("#667eea")
-  business_location       String?   @db.VarChar(255)
-  phone_number            String?   @db.VarChar(20)
-  website_url             String?   @db.VarChar(255)
+  business_location       String?   
+  phone_number            String?   
+  website_url             String?   
 
   // Brand Configuration (FIXED - NEW FIELDS)
-  logo_url        String? @db.LongText // Logo image URL
+  logo_url        String? 
   branding_config Json? // JSON: { primary_color, secondary_color, logo_url }
 
   // Main branch (for aggregated dashboard)
@@ -141,18 +141,18 @@ model TenantSettings {
   tenant_id          String  @unique
   primary_color      String  @default("#667eea")
   secondary_color    String  @default("#667eea")
-  custom_brand_name  String? @db.VarChar(255)
-  opening_hours      String? @db.VarChar(100)
-  closing_hours      String? @db.VarChar(100)
-  contact_email      String? @db.VarChar(255)
-  contact_phone      String? @db.VarChar(20)
+  custom_brand_name  String? 
+  opening_hours      String? 
+  closing_hours      String? 
+  contact_email      String? 
+  contact_phone      String? 
   currency           String  @default("USD")
-  payment_methods    String? @db.LongText // JSON
-  shipping_providers String? @db.LongText // JSON
+  payment_methods    Json?
+  shipping_providers Json?
 
   // Brand Configuration (FIXED - NEW FIELDS)
-  branding_config String? @db.LongText // JSON: { primary_color, secondary_color, logo_url }
-  logo_url        String? @db.LongText
+  branding_config  Json?
+  logo_url         String?
 
   // Features (per subscription tier)
   maps_enabled    Boolean @default(false)
@@ -166,8 +166,8 @@ model TenantSettings {
   timezone String? @default("UTC")
 
   // --- Direct Settlement Payment System ---
-  mobile_money_network String? @db.VarChar(50) // Example: M-Pesa, MTN
-  mobile_money_number  String? @db.VarChar(50) // Till Number or Phone Number
+  mobile_money_network String? 
+  mobile_money_number  String? 
 
   tenant     Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
   created_at DateTime @default(now())
@@ -208,8 +208,8 @@ model User {
 model MerchantAccount {
   id                  String    @id @default(cuid())
   tenant_id           String    @unique
-  dashboard_user      String    @unique @db.VarChar(255)
-  dashboard_pass_hash String    @db.VarChar(255) // BCRYPT
+  dashboard_user      String    @unique 
+  dashboard_pass_hash String    
   login_attempts      Int       @default(0)
   last_login          DateTime?
   is_locked           Boolean   @default(false)
@@ -229,25 +229,25 @@ model MerchantAccount {
 model Location {
   id             String  @id @default(cuid())
   tenant_id      String
-  name           String  @db.VarChar(255) // "Main Store", "Branch 2"
-  slug           String? @db.VarChar(100) // URL slug
-  address        String  @db.VarChar(500)
-  city           String  @db.VarChar(100)
-  country        String  @db.VarChar(100)
+  name           String  
+  slug           String? 
+  address        String 
+  city           String  
+  country        String  
   latitude       Float?
   longitude      Float?
-  phone_number   String? @db.VarChar(20)
-  email          String? @db.VarChar(255)
-  opening_hours  String? @db.VarChar(100)
-  closing_hours  String? @db.VarChar(100)
+  phone_number   String? 
+  email          String? 
+  opening_hours  String? 
+  closing_hours  String?
   is_active      Boolean @default(true)
   is_main_branch Boolean @default(false)
 
   // Social media branding
-  instagram_handle String? @db.VarChar(100)
-  facebook_page    String? @db.VarChar(100)
-  tiktok_handle    String? @db.VarChar(100)
-  twitter_handle   String? @db.VarChar(100)
+  instagram_handle String? 
+  facebook_page    String? 
+  tiktok_handle    String? 
+  twitter_handle   String? 
 
   // Relationships
   tenant           Tenant            @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
@@ -274,18 +274,18 @@ model Location {
 model Product {
   id          String  @id @default(cuid())
   tenant_id   String
-  name        String  @db.VarChar(255)
+  name        String  
   price       Float
-  description String? @db.LongText
-  category    String? @db.VarChar(100)
-  image_url   String? @db.LongText
-  niche       String? @db.VarChar(50)
-  is_active   Boolean @default(true)
+  description String? 
+  category    String? 
+  image_url   String? 
+  niche       String? 
+  is_active   Boolean 
 
   // Images (FIXED - NEW FIELDS)
-  productImage  String? @db.LongText // Main product image URL
-  product_image String? @db.LongText // Alias for compatibility
-  images        String? @db.LongText // JSON array of all images
+  productImage  String?  
+  product_image String? 
+  images        String? 
 
   // B2B specific
   wholesale_price  Float?
@@ -330,18 +330,18 @@ model Order {
   id             String  @id @default(cuid())
   tenant_id      String
   location_id    String
-  order_number   String  @unique @db.VarChar(50)
-  customer_email String  @db.VarChar(255)
-  customer_phone String? @db.VarChar(20)
-  customer_name  String? @db.VarChar(255)
+  order_number   String  @unique 
+  customer_email String 
+  customer_phone String? 
+  customer_name  String? 
   amount         Float
   currency       String  @default("USD")
   status         String  @default("pending")
 
   // Shipping
-  shipping_address   String?   @db.LongText
-  shipping_method    String?   @db.VarChar(100)
-  tracking_number    String?   @db.VarChar(255)
+  shipping_address   String?   
+  shipping_method    String?   
+  tracking_number    String?  
   estimated_delivery DateTime?
 
   // B2B
@@ -387,19 +387,19 @@ model OrderItem {
 model PaymentMethod {
   id          String  @id @default(cuid())
   tenant_id   String
-  method_type String  @db.VarChar(50)
-  provider_id String? @db.VarChar(255)
+  method_type String  
+  provider_id String? 
   is_primary  Boolean @default(false)
   is_active   Boolean @default(true)
 
   // Encrypted credentials
-  api_key     String? @db.VarChar(500)
-  api_secret  String? @db.VarChar(500)
-  merchant_id String? @db.VarChar(255)
+  api_key     String? 
+  api_secret  String? 
+  merchant_id String? 
 
   // Provider specific
-  webhook_secret String? @db.VarChar(500)
-  public_key     String? @db.LongText
+  webhook_secret String? 
+  public_key     String? 
 
   tenant   Tenant       @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
   payments PaymentLog[]
@@ -421,9 +421,9 @@ model PaymentLog {
   amount                  Float
   currency                String  @default("USD")
   status                  String  @default("pending")
-  provider                String? @db.VarChar(50)
-  provider_transaction_id String? @db.VarChar(255)
-  checkout_url            String? @db.LongText
+  provider                String? 
+  provider_transaction_id String? 
+  checkout_url            String? 
   plan_type               String?
   // Location add-on payment
   is_location_payment     Boolean @default(false)
@@ -431,12 +431,12 @@ model PaymentLog {
   location_cost_per       Float   @default(10)
 
   // Refund info
-  refund_reason String?   @db.VarChar(255)
+  refund_reason String?   
   refund_date   DateTime?
   refund_amount Float?
 
   // Metadata
-  metadata String? @db.LongText
+  metadata String? 
 
   tenant         Tenant         @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
   order          Order?         @relation(fields: [order_id], references: [id], onDelete: Cascade)
@@ -461,15 +461,15 @@ model ShippingConfig {
   id                  String  @id @default(cuid())
   tenant_id           String
   location_id         String
-  provider            String  @db.VarChar(100)
+  provider            String  
   is_enabled          Boolean @default(true)
   base_cost           Float   @default(0)
   per_km_cost         Float   @default(0.5)
   free_shipping_above Float?
 
   // API credentials
-  provider_api_key    String? @db.VarChar(500)
-  provider_api_secret String? @db.VarChar(500)
+  provider_api_key    String? 
+  provider_api_secret String? 
 
   tenant   Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
   location Location @relation(fields: [location_id], references: [id], onDelete: Cascade)
@@ -485,16 +485,16 @@ model ShippingConfig {
 model ShippingTracking {
   id                 String    @id @default(cuid())
   order_id           String    @unique
-  tracking_number    String    @unique @db.VarChar(255)
-  provider           String    @db.VarChar(100)
+  tracking_number    String    @unique 
+  provider           String    
   status             String    @default("pending")
-  current_location   String?   @db.VarChar(255)
+  current_location   String?   
   last_update        DateTime?
   estimated_delivery DateTime?
 
-  tracking_data   String?   @db.LongText
-  proof_photo_url String?   @db.LongText
-  signed_by       String?   @db.VarChar(255)
+  tracking_data   String?   
+  proof_photo_url String?   
+  signed_by       String?   
   delivered_at    DateTime?
 
   order Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
@@ -537,8 +537,8 @@ model WeeklyAnalytics {
   discounts_given Float @default(0)
   discount_count  Int   @default(0)
 
-  top_products    String? @db.LongText
-  daily_breakdown String? @db.LongText
+  top_products    String? 
+  daily_breakdown  String? 
 
   tenant   Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
   location Location @relation(fields: [location_id], references: [id], onDelete: Cascade)
@@ -560,18 +560,18 @@ model Review {
   id               String  @id @default(cuid())
   tenant_id        String
   location_id      String
-  customer_name    String  @db.VarChar(255)
-  customer_email   String  @db.VarChar(255)
+  customer_name    String  
+  customer_email   String  
   rating           Int     @default(5)
-  title            String? @db.VarChar(255)
-  content          String  @db.LongText
+  title            String? 
+  content          String  
   source           String  @default("website")
-  google_review_id String? @db.VarChar(255)
+  google_review_id String? 
 
   is_verified_purchase Boolean @default(false)
   is_approved          Boolean @default(true)
 
-  admin_response     String?   @db.LongText
+  admin_response     String?  
   admin_responded_at DateTime?
 
   tenant   Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
@@ -623,18 +623,17 @@ model Rating {
 model SocialMediaConfig {
   id                    String  @id @default(cuid())
   tenant_id             String  @unique
-  instagram_handle      String? @db.VarChar(100)
-  instagram_api_key     String? @db.VarChar(500)
+  instagram_handle      String?
+  instagram_api_key     String? 
   instagram_feed_count  Int     @default(0)
-  facebook_page_id      String? @db.VarChar(100)
-  facebook_api_key      String? @db.VarChar(500)
-  facebook_pixel_id     String? @db.VarChar(100)
-  tiktok_handle         String? @db.VarChar(100)
-  twitter_handle        String? @db.VarChar(100)
-  linkedin_page         String? @db.VarChar(255)
-  youtube_channel       String? @db.VarChar(255)
-  brand_primary_color   String? @db.VarChar(10)
-  brand_secondary_color String? @db.VarChar(10)
+  facebook_page_id      String? 
+  facebook_api_key      String? 
+  facebook_pixel_id     String? 
+  tiktok_handle         String?
+  twitter_handle        String? 
+  youtube_channel       String?
+  brand_primary_color   String?
+  brand_secondary_color String? 
 
   tenant Tenant @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
 
@@ -653,15 +652,15 @@ model B2BDiscount {
   location_id         String
   product_id          String
   tenant_id           String?
-  customer_email      String?   @db.VarChar(255)
-  customer_name       String?   @db.VarChar(255)
-  customer_company    String?   @db.VarChar(255)
+  customer_email      String?   
+  customer_name       String?   
+  customer_company    String?  
   status              String    @default("pending")
   requested_discount  Float     @default(0)
   approved_discount   Float?
   min_order_value     Float     @default(0)
-  admin_notes         String?   @db.LongText
-  customer_message    String?   @db.LongText
+  admin_notes         String?  
+  customer_message    String?  
   is_volume_based     Boolean   @default(false)
   min_quantity        Int?
   discount_percentage Float     @default(0)
@@ -687,10 +686,10 @@ model B2BDiscount {
 model AuditLog {
   id          String  @id @default(cuid())
   tenant_id   String
-  action_type String  @db.VarChar(100)
-  details     String? @db.LongText
-  ip_address  String? @db.VarChar(50)
-  user_agent  String? @db.LongText
+  action_type String 
+  details     String? 
+  ip_address  String? 
+  user_agent  String?
 
   tenant Tenant @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
 
@@ -704,10 +703,10 @@ model AuditLog {
 model SecurityIncident {
   id                String  @id @default(cuid())
   tenant_id         String
-  attacker_ip       String  @db.VarChar(50)
-  malicious_payload String? @db.LongText
+  attacker_ip       String 
+  malicious_payload String?
   severity          String  @default("low") // low, medium, high, critical
-  incident_type     String  @db.VarChar(100)
+  incident_type     String  
 
   tenant Tenant @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
 
@@ -725,15 +724,15 @@ model SecurityIncident {
 model ProductImage {
   id           String  @id @default(uuid())
   productId    String
-  url          String  @db.LongText
+  url          String 
   altText      String?
   isPrimary    Boolean @default(false)
-  thumbUrl     String? @db.LongText // ADD THIS
-  caption      String? @db.LongText // ADD THIS
-  displayOrder Int     @default(0) // ADD THIS
+  thumbUrl     String? 
+  caption      String?
+  displayOrder Int     @default(0)
 
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt // ADD THIS
+  updated_at DateTime @updatedAt 
 
   @@index([productId])
   @@index([isPrimary])
@@ -743,11 +742,11 @@ model ProductSEO {
   id                 String   @id @default(cuid())
   productId          String   @unique
   meta_title         String?
-  meta_description   String?  @db.Text
+  meta_description   String?  
   keywords           String?
-  description        String?  @db.Text
+  description        String?  
   long_tail_keywords Json?
-  alt_text           String?  @db.Text
+  alt_text           String?  
   structured_data    Json?
   optimized_titles   Json?
   ai_generated       Boolean  @default(false)
@@ -760,7 +759,7 @@ model WebsiteStatus {
   tenant_id           String   @unique
   is_online           Boolean  @default(true)
   manual_status       String   @default("enabled")
-  maintenance_message String?  @db.Text
+  maintenance_message String?  
   updated_at          DateTime @updatedAt
 }
 
@@ -768,7 +767,7 @@ model WebsiteControlLog {
   id           String   @id @default(cuid())
   tenant_id    String
   action       String
-  reason       String?  @db.Text
+  reason       String?  
   performed_by String
   created_at   DateTime @default(now())
 }
@@ -777,7 +776,7 @@ model AdminActivity {
   id          String   @id @default(cuid())
   admin_id    String
   action      String
-  description String?  @db.Text
+  description String?  
   tenant_id   String?
   created_at  DateTime @default(now())
 }
