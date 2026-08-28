@@ -177,7 +177,8 @@ router.post(
                 description,
                 category,
                 image_url: imageUrl,
-                niche: tenant.selected_niche
+                niche: tenant.selected_niche,
+                is_active: true
             }
         });
 
