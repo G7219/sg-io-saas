@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { authMiddleware } from '../../middleware/auth';
-import { asyncHandler } from '../../middleware/errorHandler';
-import { getNiche } from '../../config/niches';
-import * as Errors from '../../utils/Errors';
+import { authMiddleware } from '../../middleware/auth.js';
+import { asyncHandler } from '../../middleware/errorHandler.js';
+import { getNiche } from '../../config/niches.js';
+import * as Errors from '../../utils/Errors.js';
 const router = Router();
 const prisma = new PrismaClient();
 // Protect all routes
