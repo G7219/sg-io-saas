@@ -67,8 +67,8 @@ router.get('/:tenantId/logs', async (req: Request, res: Response) => {
 //         import usersRoutes from './users.routes';
 //         import reportsRoutes from './reports.routes';
 
-//         import { authMiddleware } from '../../../middleware/auth';
-//         import { validateAdminAccess } from '../../../middleware/admin';
+//         import { authMiddleware } from '../../..js';
+//         import { validateAdminAccess } from '../../../middleware/admin.js';
 
 //         const router = Router();
 

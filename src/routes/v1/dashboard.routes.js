@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { authMiddleware, checkSubscriptionStatus } from '../../middleware/auth';
-import { asyncHandler } from '../../middleware/errorHandler';
-import * as Errors from '../../utils/Errors';
+import { authMiddleware, checkSubscriptionStatus } from '../../middleware/auth.js';
+import { asyncHandler } from '../../middleware/errorHandler.js';
+import * as Errors from '../../utils/Errors.js';
 const router = Router();
 const prisma = new PrismaClient();
 // Protect all routes
