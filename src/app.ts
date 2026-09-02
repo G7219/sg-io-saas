@@ -19,7 +19,7 @@ config();
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
 import { securityHeaders } from './middleware/security.js';
-//import { requestLogger } from './middleware/logging.js';
+//import { requestLogger } from './middleware/logging';
 import { authMiddleware } from './middleware/auth.js';
 
 // Import routes

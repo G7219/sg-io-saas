@@ -3,7 +3,7 @@
  * Auto-generate product descriptions, keywords, and SEO metadata
  */
 import { Router, Request, Response } from 'express';
-import AISEOService from '../../services/ai-seo.service';
+import AISEOService from '../../services/ai-seo.service.js';
 const router = Router();
 /**
  * POST /api/v1/ai-seo/generate/:productId

@@ -3,8 +3,8 @@
  * Endpoints for managing locations and B2B discount requests
  */
 import { Router } from 'express';
-import { authMiddleware, checkSubscriptionStatus } from '../middleware/auth';
-import { tenantContextMiddleware } from '../middleware/tenantContext';
+import { authMiddleware, checkSubscriptionStatus } from '../middleware/auth.js';
+import { tenantContextMiddleware } from '../middleware/tenantContext.js';
 /*import {
     getLocations,
     createLocation,
