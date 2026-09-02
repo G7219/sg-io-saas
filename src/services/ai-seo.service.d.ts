@@ -23,7 +23,7 @@ export declare class AISEOService {
      */
     generateSEOKeywords(productName: string, description: string, category: string, nicheType: string): Promise<{
         success: boolean;
-        data: any;
+        data: any
         error?: never;
     } | {
         success: boolean;
