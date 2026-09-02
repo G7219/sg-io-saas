@@ -146,7 +146,8 @@ router.post('/products', checkSubscriptionStatus('lite'), asyncHandler(async (re
             description,
             category,
             image_url: imageUrl,
-            niche: tenant.selected_niche
+            niche: tenant.selected_niche,
+            is_active: true
         }
     });
     res.status(201).json({

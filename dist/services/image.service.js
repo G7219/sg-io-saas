@@ -363,7 +363,7 @@ export class ImageService {
             let branding = defaultBranding;
             if (settings?.branding_config) {
                 try {
-                    branding = JSON.parse(settings.branding_config);
+                    branding = JSON.parse(String(settings.branding_config));
                 }
                 catch {
                     branding = defaultBranding;
