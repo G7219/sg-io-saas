@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { TenantContext } from '../types/index';
+import { TenantContext } from '../types/index.js';
 import prisma from '../config/database.js';
 /**
  * Middleware to extract and load tenant context from subdomain
