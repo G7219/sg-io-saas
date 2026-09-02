@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { JwtService } from '../../utils/jwt';
-import { ApiError, asyncHandler } from '../../middleware/errorHandler';
-import * as Errors from '../../utils/Errors';
-import { authMiddleware } from '../../middleware/auth';
+import { JwtService } from '../../utils/jwt.js';
+import { ApiError, asyncHandler } from '../../middleware/errorHandler.js';
+import * as Errors from '../../utils/Errors.js';
+import { authMiddleware } from '../../middleware/auth.js';
 const router = Router();
 const prisma = new PrismaClient();
 /**
