@@ -6,8 +6,8 @@
  * - Added all static page routes for /pricing, /solutions, /privacy, /contact, etc
  * - Placed before 404 handler to prevent "Route not found" errors
  */
-
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express from 'express';
+import type { Express, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { config } from 'dotenv';
